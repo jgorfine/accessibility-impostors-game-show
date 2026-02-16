@@ -2,7 +2,7 @@
 layout: "base.njk"
 ---
 
-<main data-controller="game">
+<main data-controller="game" data-game-fizz-value="{{ impostor }}" data-game-bar-value="false">
   <header data-controller="timer">
     <h1>{{ h1 }}</h1>
     <section 
@@ -86,7 +86,7 @@ layout: "base.njk"
         <button 
           data-game-target="foo"
           data-toolbar-target="control" 
-          data-action="game#toggleDialog toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          data-action="game#toggle toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="impostor-toggle"
           tabindex="-1" 
           aria-checked="false" 
@@ -108,12 +108,11 @@ layout: "base.njk"
       <audio></audio>
     </section>
   </header>
-  <section id="stage" aria-labelledby="" role="region">
-    <h2 id="" class="sr-only"></h2>
+  <div id="stage">
     <div class="grid">
       {{ content | safe }}
     </div>
-  </section>
+  </div>
   <div data-timer-target="liveregion" role="status" aria-role="polite"></div>
 </main>
 <footer role="contentinfo">

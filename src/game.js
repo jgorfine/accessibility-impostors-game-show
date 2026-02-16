@@ -2,59 +2,6 @@ import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/di
 
 window.Stimulus = Application.start();
 
-Stimulus.register("game", class extends Controller {
-  static targets = [ "foo", "dialog" ]
-
-  toggleDialog() {
-    console.log('attempting to toggle dialog');
-
-    this.dialogTargets.forEach((dialog) => {
-      dialog.show();
-    })
-  }
-})
-
-Stimulus.register("toolbar", class extends Controller {
-  static targets = [ "control" ]
-  static values = { index: Number }
-
-  next() {
-    const visibleControls = this.controlTargets;
-    console.log("next, visible controls", visibleControls);
-    const newIndex = (this.indexValue + 1) % visibleControls.length;
-    this.indexValue = newIndex;
-    this.focusControl();
-  }
-
-  prev() {
-    const visibleControls = this.controlTargets;
-    console.log("prev, visible controls", visibleControls);
-    const newIndex = ((this.indexValue - 1) + visibleControls.length) % visibleControls.length;
-    this.indexValue = newIndex;
-    this.focusControl();
-  }
-
-  toggle(event) {
-    const switchElement = event.target.closest("[role='switch']");
-    const isChecked = switchElement.getAttribute('aria-checked') === 'true';
-    switchElement.setAttribute('aria-checked', !isChecked);
-  }
-
-  focusControl() {
-    this.controlTargets[this.indexValue].focus();
-  }
-
-  updateTabIndices() {
-    this.controlTargets.forEach((element, index) => {
-      element.tabIndex = index === this.indexValue ? "0" : "-1";
-    })
-  }
-
-  indexValueChanged() {
-    this.updateTabIndices();
-  }
-})
-
 /**
  * Timer formatting credit
  * @author JavaScript Development Space
@@ -124,6 +71,72 @@ Stimulus.register("timer", class extends Controller {
     const isChecked = this.switchTarget.getAttribute('aria-checked') === 'true';
     !isChecked ? this.start() : this.pause();
     this.switchTarget.setAttribute('aria-checked', !isChecked);
+  }
+})
+
+Stimulus.register("toolbar", class extends Controller {
+  static targets = [ "control" ]
+  static values = { index: Number }
+
+  next() {
+    const visibleControls = this.controlTargets;
+    console.log("next, visible controls", visibleControls);
+    const newIndex = (this.indexValue + 1) % visibleControls.length;
+    this.indexValue = newIndex;
+    this.focusControl();
+  }
+
+  prev() {
+    const visibleControls = this.controlTargets;
+    console.log("prev, visible controls", visibleControls);
+    const newIndex = ((this.indexValue - 1) + visibleControls.length) % visibleControls.length;
+    this.indexValue = newIndex;
+    this.focusControl();
+  }
+
+  toggle(event) {
+    const switchElement = event.target.closest("[role='switch']");
+    const isChecked = switchElement.getAttribute('aria-checked') === 'true';
+    switchElement.setAttribute('aria-checked', !isChecked);
+  }
+
+  focusControl() {
+    this.controlTargets[this.indexValue].focus();
+  }
+
+  updateTabIndices() {
+    this.controlTargets.forEach((element, index) => {
+      element.tabIndex = index === this.indexValue ? "0" : "-1";
+    })
+  }
+
+  indexValueChanged() {
+    this.updateTabIndices();
+  }
+})
+
+Stimulus.register("game", class extends Controller {
+  static targets = [ "foo", "name", "figure", "figcaption" ]
+  static values = { fizz: Number, bar: Boolean }
+
+  toggle() {
+    this.figureTargets.forEach((figure, index) => {
+      if (figure.querySelector("figcaption") === null) {
+        const isImpostor = index + 1 === this.fizzValue;
+        figure.classList.add(isImpostor && "impostor");
+        const figcaptionElement = document.createElement("figcaption");
+        figcaptionElement.setAttribute("data-game-target", "figcaption");
+        figcaptionElement.classList.add(!isImpostor && "sr-only");
+        const innerElement = document.createElement("span");
+        innerElement.textContent = isImpostor ? "Impostor" : "[] is not the impostor";
+        figcaptionElement.append(innerElement);
+        figure.prepend(figcaptionElement);
+      } else {
+        figure.querySelector("figcaption").hidden = this.barValue;
+      }
+    });
+
+    this.barValue = !this.barValue;
   }
 })
 

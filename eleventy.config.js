@@ -38,12 +38,11 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPairedShortcode("sample", function(content, count, type, isImpostor, controller) {
     return `<section id="sample-${count}" class="sample" aria-labelledby="sample-${count}__heading" role="region">
-<h2 id="sample-${count}__heading" class="sample__heading">${type} #${count}</h2>
+<h2 data-game-target="name" id="sample-${count}__heading" class="sample__heading">${type} #${count}</h2>
 <div class="sample__content">
-<figure aria-labelledby="sample-${count}__heading">
-<div class="figtray" ${controller && `data-controller="${controller}"`}>${content}</figtray>
+<figure data-game-target="figure">
+<div class="figtray" ${controller ? `data-controller="${controller}"` : ''}>${content}</figtray>
 </figure>
-${isImpostor ? '' : `<div class="test1"><div class="test3"><dialog data-game-target="dialog"><span>Not the impostor</span></dialog><div class="test2"></div></div></div>`}
 </div>
 </section>`;
   });

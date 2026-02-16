@@ -1,5 +1,6 @@
 ---
 name: "Round #2"
+impostor: "3"
 eleventyComputed:
   title: "{{ name }} / {{ site.name }}"
   h1: "{{ name }}: Links"
@@ -20,5 +21,5 @@ layout: "game.njk"
 {% endsample %}
 
 {% sample "4", "Link", false %}
-  <a class="game-link style--1" href="https://www.deque.com/axe-con/about" rel="nofollow">About</a>
+  <a class="game-link style--2" href="https://www.deque.com/axe-con/about" rel="nofollow">About</a>
 {% endsample %}
