@@ -1,3 +1,7 @@
+/******************************************
+ *              BODY STYLES               *
+ ******************************************/
+
 body {
   --header-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
 
@@ -141,7 +145,7 @@ section:has([role="toolbar"]) {
 .grid {
   display: grid;
   gap: var(--stage-spacing);
-  min-height: 75dvh;
+  /* min-height: 75dvh; */
 }
 
 @media only screen and (min-width: 500px) {
@@ -199,7 +203,7 @@ figure {
   flex-direction: column;
   height: 100%;
   margin: 0;
-  min-height: 33vh;
+  /* min-height: 33vh; */
   position: relative;
 }
 
@@ -242,10 +246,9 @@ figcaption > span {
 /* ---------------------------------------- */
 
 .game-text-block {
-  font-size: clamp(0.875em, 4cqi, 1.125em);
   padding: 2em;
   overflow-y: auto;
-  max-height: 60dvh;
+  /* max-height: 60dvh; */
 }
 
 #sample-1 .game-text-block {

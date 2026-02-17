@@ -140,6 +140,12 @@ Stimulus.register("game", class extends Controller {
   }
 })
 
+Stimulus.register("links", class extends Controller {
+  navigate() {
+    window.location.href = event.target.dataset['href'];
+  }
+})
+
 Stimulus.register("filters", class extends Controller {
   static targets = [ "toggle", "filters", "tracks" ]
   static values = { expanded: Boolean }
