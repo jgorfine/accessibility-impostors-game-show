@@ -115,18 +115,3 @@ layout: "base.njk"
   </div>
   <div data-timer-target="liveregion" role="status" aria-role="polite"></div>
 </main>
-<footer role="contentinfo">
-  <nav aria-label="">
-    <a href="/">{{ site.name }}</a>
-    <ol>
-      {%- for round in collections.game -%}
-      <li>
-        <a href="{{round.url}}" {% if page.url == round.url %} aria-current="page"{% endif %}>{{ round.data.h1 }}</a>
-      </li>
-      {%- endfor -%}
-    </ol>
-    <a href="https://www.deque.com/axe-con/">
-      <img src="img/axe-con-logo.svg" alt="axe-con 2026">
-    </a>
-  </nav>
-</footer>

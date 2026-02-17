@@ -325,7 +325,7 @@ figcaption > span {
 
 .game-link.style--2 {
   color: #fff;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .game-link.style--2:hover, 
@@ -538,37 +538,4 @@ figcaption > span {
 
 .game-filters select:focus {
   outline: none;
-}
-
-/******************************************
- *            FOOTER STYLES               *
- ******************************************/
-
-/* footer[role="contentinfo"] {
-  background: linear-gradient(180deg,var(--axecon-color-3) 5.34%,var(--axecon-color-2) 96.27%);
-} */
-
-footer[role="contentinfo"] a {
-  color: #fff;
-  text-decoration: none;
-}
-
-footer[role="contentinfo"] a:hover, 
-footer[role="contentinfo"] a:focus {
-  text-decoration: underline;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 6px;
-}
-
-footer[role="contentinfo"] a:has(img) {
-  display: inline-block;
-  font-size: 1em;
-  height: auto;
-  width: min(100%, 9em);
-}
-
-footer[role="contentinfo"] a img {
-  display: block;
-  height: auto; 
-  width: 100%;
 }

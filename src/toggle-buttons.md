@@ -6,6 +6,7 @@ eleventyComputed:
   h1: "{{ name }}: Toggle Buttons"
 tags: game
 layout: "game.njk"
+date: 2026-02-16T23:03:00Z
 ---
 
 {% sample "1", "Toggle Button", true %}

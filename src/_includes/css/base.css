@@ -54,3 +54,53 @@ button {
   white-space: nowrap;
   border-width: 0;
 }
+
+footer[role="contentinfo"] {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4em 8em;
+  justify-content: space-between;
+  padding: 4em clamp(1em, 2cqi, 2em) 8em;
+}
+
+/* footer[role="contentinfo"] nav > a {
+  font-size: 1.75em;
+  font-weight: 300;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+} */
+
+footer[role="contentinfo"] ol {
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 1.25em;
+}
+
+footer[role="contentinfo"] a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer[role="contentinfo"] a:hover, 
+footer[role="contentinfo"] a:focus {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+footer[role="contentinfo"] a:has(img) {
+  display: inline-block;
+  font-size: 1em;
+  height: auto;
+  width: min(100%, 15em);
+}
+
+footer[role="contentinfo"] a img {
+  display: block;
+  height: auto; 
+  width: 100%;
+}

@@ -6,6 +6,7 @@ eleventyComputed:
   h1: "{{ name }}: Links"
 tags: game
 layout: "game.njk"
+date: 2026-02-16T23:01:00Z
 ---
 
 {% sample "1", "Link", false %}
