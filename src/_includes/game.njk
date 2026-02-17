@@ -2,8 +2,8 @@
 layout: "base.njk"
 ---
 
-<main data-controller="game" data-game-fizz-value="{{ impostor }}" data-game-bar-value="false">
-  <header data-controller="timer">
+<main data-controller="layout game" data-game-fizz-value="{{ impostor }}" data-game-bar-value="false">
+  <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight" data-controller="timer">
     <h1>{{ h1 }}</h1>
     <section 
       data-timer-active-value="false" 
@@ -108,9 +108,11 @@ layout: "base.njk"
       <audio></audio>
     </section>
   </header>
-  <div id="stage">
-    <div class="grid">
-      {{ content | safe }}
+  <div data-layout-target="stage" id="stage" class="round--{{ count }}">
+    <div class="stage__container">
+      <div class="grid">
+        {{ content | safe }}
+      </div>
     </div>
   </div>
   <div data-timer-target="liveregion" role="status" aria-role="polite"></div>

@@ -2,6 +2,23 @@ import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/di
 
 window.Stimulus = Application.start();
 
+Stimulus.register("layout", class extends Controller {
+  static targets = [ "header", "stage" ]
+
+  captureHeaderHeight() {
+    const headerHeight = this.headerTarget.offsetHeight;
+    this.stageTarget.style.setProperty('--header-height', `${headerHeight}px`);
+  }
+
+  connect() {
+    this.captureHeaderHeight();
+  }
+
+  recalculateHeight() {
+    this.captureHeaderHeight();
+  }
+})
+
 /**
  * Timer formatting credit
  * @author JavaScript Development Space

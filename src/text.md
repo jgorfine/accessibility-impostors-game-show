@@ -1,9 +1,9 @@
 ---
-name: "Round #1"
+count: "1"
 impostor: "2"
 eleventyComputed:
-  title: "{{ name }} / {{ site.name }}"
-  h1: "{{ name }}: Text"
+  title: "Round #{{ count }} / {{ site.name }}"
+  h1: "Round #{{ count }}: Text"
 tags: game  
 layout: "game.njk"
 page_css: "css/text-color.css"

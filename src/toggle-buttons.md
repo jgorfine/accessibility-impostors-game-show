@@ -1,9 +1,9 @@
 ---
-name: "Round #4"
+count: "4"
 impostor: "1"
 eleventyComputed:
-  title: "{{ name }} / {{ site.name }}"
-  h1: "{{ name }}: Toggle Buttons"
+  title: "Round #{{ count }} / {{ site.name }}"
+  h1: "Round #{{ count }}: Toggle Buttons"
 tags: game
 layout: "game.njk"
 date: 2026-02-16T23:03:00Z
@@ -14,9 +14,13 @@ date: 2026-02-16T23:03:00Z
 {% endsample %}
 
 {% sample "2", "Toggle Button", false %}
-  {% filters "Wednesday, February 25" %}
+  {% filters "Tuesday, February 24" %}
 {% endsample %}
 
 {% sample "3", "Toggle Button", false %}
   {% filters "Tuesday February 24" %}
+{% endsample %}
+
+{% sample "4", "Toggle Button", false %}
+  {% filters "Wednesday February 25" %}
 {% endsample %}

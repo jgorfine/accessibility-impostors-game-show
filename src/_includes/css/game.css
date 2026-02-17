@@ -138,36 +138,23 @@ section:has([role="toolbar"]) {
   --stage-spacing: clamp(1em, 2cqi, 2em);
 
   background: linear-gradient(180deg, var(--axecon-color-3) -6.43%, var(--axecon-color-4) 100%);
-  container: stage / inline-size;
   padding: var(--stage-spacing);
+}
+
+@media only screen and (min-width: 900px) {
+  #stage {
+    height: calc(100dvh - var(--header-height, 7em));
+  }
+}
+
+.stage__container {
+  container: stage / size;
+  height: 100%;
 }
 
 .grid {
   display: grid;
   gap: var(--stage-spacing);
-  /* min-height: 75dvh; */
-}
-
-@media only screen and (min-width: 500px) {
-  .grid:has(> *:nth-child(6):last-child) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-  }
-}
-
-@media only screen and (min-width: 900px) {
-  .grid:has(> *:nth-child(3):last-child) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .grid:has(> *:nth-child(4):last-child) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .grid:has(> *:nth-child(6):last-child) {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
 }
 
 .sample {
@@ -195,26 +182,21 @@ section:has([role="toolbar"]) {
   display: flex;
   flex: 1 1 100%;
   flex-direction: column;
+  overflow: auto;
   position: relative;
 }
 
 figure {
+  container: figure / inline-size;
   display: flex;
   flex-direction: column;
   height: 100%;
   margin: 0;
-  /* min-height: 33vh; */
   position: relative;
 }
 
 figcaption {
   text-align: center;
-}
-
-@media only screen and (min-width: 900px) {
-  figcaption {
-    flex: 1 0 4.75em;
-  }
 }
 
 figcaption > span {
@@ -229,16 +211,30 @@ figcaption > span {
 }
 
 .figtray {
+  align-items: start;
   container: tray / inline-size;
   display: flex;
-  flex: 1 1 100%;
+  flex: 1 1 auto;
   justify-content: center;
-  padding: var(--stage-spacing);
+  overflow: auto;
+  padding: 1em;
   position: relative;
 }
 
-.figtray > * {
-  margin: auto;
+/******************************************
+ *         GAME STYLES: ROUND #1          *
+ ******************************************/
+
+@container stage (width > 900px) {
+  .round--1 .grid {
+    grid-template-columns: repeat(3, 1fr);
+    height: 100%;
+  }
+
+  .round--1 .sample {
+    max-height: 100%;
+    overflow: hidden;
+  }
 }
 
 /* ---------------------------------------- */
@@ -283,6 +279,34 @@ figcaption > span {
 
 .game-text-block__blurb + .game-text-block__blurb {
   margin-top: 1em;
+}
+
+/******************************************
+ *         GAME STYLES: ROUND #2          *
+ ******************************************/
+
+.round--2 .figtray > * {
+  margin: auto;
+}
+
+@container stage (width > 500px) {
+  .round--2 .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .round--2 .sample {
+    max-height: 100%;
+    overflow: hidden;
+  }
+}
+
+@container stage (width > 900px){
+  .round--2 .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 100%;
+  }
 }
 
 /* ---------------------------------------- */
@@ -336,6 +360,34 @@ figcaption > span {
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-underline-offset: 6px;
+}
+
+/******************************************
+ *         GAME STYLES: ROUND #3          *
+ ******************************************/
+
+.round--3 .figtray > * {
+  margin: auto;
+}
+
+@container stage (width > 500px) {
+  .round--3 .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .round--3 .sample {
+    max-height: 100%;
+    overflow: hidden;
+  }
+}
+
+@container stage (width > 900px) {
+  .round--3 .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 100%;
+  }
 }
 
 /* ---------------------------------------- */
@@ -403,6 +455,36 @@ figcaption > span {
   width: 8px;
 }
 
+/******************************************
+ *         GAME STYLES: ROUND #4          *
+ ******************************************/
+ 
+@container stage (width > 900px) {
+  .round--4 .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 100%;
+  }
+
+  .round--4 .sample {
+    max-height: 100%;
+    overflow: hidden;
+  }
+}
+
+@container stage (width > 900px) and (height < 900px) {
+  .round--4 .grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    height: 100%;
+  }
+
+  .round--4 .sample {
+    max-height: 100%;
+    overflow: hidden;
+  }
+}
+
 /* ---------------------------------------- */
 /* Game: Toggle Buttons */
 /* ---------------------------------------- */
@@ -414,6 +496,7 @@ figcaption > span {
   background-color: #fff;
   font-size: 1rem;
   padding: 1em;
+  width: min(100%, 45em);
 }
 
 .game-filters__header {
