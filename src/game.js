@@ -126,9 +126,9 @@ Stimulus.register("game", class extends Controller {
         figure.classList.add(isImpostor && "impostor");
         const figcaptionElement = document.createElement("figcaption");
         figcaptionElement.setAttribute("data-game-target", "figcaption");
-        figcaptionElement.classList.add(!isImpostor && "sr-only");
         const innerElement = document.createElement("span");
-        innerElement.textContent = isImpostor ? "Impostor" : "[] is not the impostor";
+        innerElement.classList.add(!isImpostor && "sr-only");
+        innerElement.textContent = isImpostor ? "Impostor" : "Not the impostor";
         figcaptionElement.append(innerElement);
         figure.prepend(figcaptionElement);
       } else {

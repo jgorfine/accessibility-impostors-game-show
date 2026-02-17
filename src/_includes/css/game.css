@@ -1,4 +1,6 @@
 body {
+  --header-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
+
   background-color: var(--axecon-color-2);
 }
 
@@ -8,7 +10,7 @@ body {
 
 header {
   background-color: var(--axecon-color-2);
-  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--header-box-shadow);
   padding: 1em;
   position: sticky;
   top: 0;
@@ -54,6 +56,7 @@ header button {
   border: none;
   border-radius: 50%;
   color: #fff;
+  cursor: pointer;
   display: inline-flex;
   flex: none;
   height: 42px;
@@ -179,7 +182,12 @@ section:has([role="toolbar"]) {
   text-align: center;
 }
 
+.sample:has(figcaption:not(hidden)) .sample__heading {
+  box-shadow: var(--header-box-shadow);
+}
+
 .sample__content {
+  background-color: var(--axecon-color-1);
   display: flex;
   flex: 1 1 100%;
   flex-direction: column;
@@ -195,8 +203,28 @@ figure {
   position: relative;
 }
 
+figcaption {
+  text-align: center;
+}
+
+@media only screen and (min-width: 900px) {
+  figcaption {
+    flex: 1 0 4.75em;
+  }
+}
+
+figcaption > span {
+  background-color: #f8f2fe;
+  color: var(--axecon-color-1);
+  display: inline-block;
+  font-size: 1em;
+  letter-spacing: 0.03em;
+  margin: 1em 0 0;
+  padding: 1em 1.5em;
+  text-transform: uppercase;
+}
+
 .figtray {
-  background: var(--axecon-color-1);
   container: tray / inline-size;
   display: flex;
   flex: 1 1 100%;
@@ -207,38 +235,6 @@ figure {
 
 .figtray > * {
   margin: auto;
-}
-
-.impostor figcaption {
-  background-color: var(--axecon-color-1);
-  color: #fef84c /*#ff6900*/;
-  font-family: "Stardos Stencil", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  /* left: 0; */
-  letter-spacing: 0.05em;
-  /* margin: auto; */
-  padding: 1em 0;
-  /* position: absolute; */
-  /* right: 0; */
-  text-align: center;
-  text-transform: uppercase;
-  z-index: 1;
-}
-
-.impostor figcaption > * {
-  border-radius: 0.125em;
-  border: 1px solid currentColor;
-  display: inline-block;
-  font-size: 1.75em;
-  letter-spacing: 0.05em;
-  line-height: 1;
-  outline: 3px solid currentColor;
-  outline-offset: 6px;
-  padding: 0.5em 0.75em;
-  position: relative;
-  rotate: -4deg;
-  top: -0.25em;
 }
 
 /* ---------------------------------------- */
