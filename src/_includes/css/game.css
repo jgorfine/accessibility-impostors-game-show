@@ -12,14 +12,14 @@ body {
 
 header {
   background-color: var(--axecon-color-2);
-  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.625em 0.938em 0 rgba(0, 0, 0, 0.15);
   padding: 1em;
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
-@media only screen and (min-width: 300px) {
+@media only screen and (min-width: 18.75em) {
   header {
     column-gap: 0.5em;
     display: grid;
@@ -29,7 +29,7 @@ header {
   }
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 43.75em) {
   header {
     align-items: center;
     grid-template-areas: "heading timer toolbar";
@@ -61,14 +61,14 @@ header button {
   cursor: pointer;
   display: inline-flex;
   flex: none;
-  height: 42px;
+  height: 2.625em;
   justify-content: center;
-  outline: 1px solid transparent;
-  width: 42px;
+  outline: 0.063em solid transparent;
+  width: 2.625em;
 }
 
 header button:focus {
-  outline: 3px solid #0dbaf7;
+  outline: 0.188em solid #0dbaf7;
 }
  
 header button svg {
@@ -105,7 +105,7 @@ header:has(#time-limit-toggle[aria-checked='false']) #timer-music-toggle {
 }
 
 [role="timer"]:focus-visible {
-  outline: 3px solid magenta;
+  outline: 0.188e solid #0dbaf7;
 }
 
 /* ---------------------------------------- */
@@ -116,7 +116,7 @@ section:has([role="toolbar"]) {
   grid-area: toolbar;
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 43.75em) {
   section:has([role="toolbar"]) {
     justify-self: end;
   }
@@ -219,7 +219,7 @@ figcaption {
   margin: auto;
 }
 
-@media only screen and (min-width: 1100px) {
+@media only screen and (min-width: 68.75em) {
   .round--1 .grid {
     grid-template-columns: repeat(3, 1fr);
     height: calc(90dvh - var(--header-height, 7em));
@@ -278,10 +278,6 @@ figcaption {
  *         GAME STYLES: ROUND #2          *
  ******************************************/
 
-.round--2 .figtray > * {
-  margin: auto;
-}
-
 @media only screen and (min-width: 500px) {
   .round--2 .grid {
     grid-template-columns: repeat(2, 1fr);
@@ -300,6 +296,10 @@ figcaption {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
+}
+
+.round--2 .figtray > * {
+  margin: auto;
 }
 
 /* ---------------------------------------- */
@@ -324,12 +324,12 @@ figcaption {
 
 .game-link.style--1 {
   background-color: var(--axecon-color-1);
-  background-image: linear-gradient(90deg,#e466fa 5px, var(--axecon-color-1) 5px);
-  background-position: -5px center;
+  background-image: linear-gradient(90deg,#e466fa 0.313em, var(--axecon-color-1) 0.313em);
+  background-position: -0.313em center;
   background-repeat: no-repeat;
   display: block;
-  font-size: 20px;
-  padding: 10px 30px;
+  font-size: 1.25em;
+  padding: 0.625em 1.875em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -345,23 +345,19 @@ figcaption {
 
 .game-link.style--2 {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.5em;
 }
 
 .game-link.style--2:hover, 
 .game-link.style--2:focus {
   text-decoration: underline;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 6px;
+  text-decoration-thickness: 0.125em;
+  text-underline-offset: 0.25em;
 }
 
 /******************************************
  *         GAME STYLES: ROUND #3          *
  ******************************************/
-
-.round--3 .figtray > * {
-  margin: auto;
-}
 
 @media only screen and (min-width: 500px) {
   .round--3 .grid {
@@ -383,12 +379,16 @@ figcaption {
   }
 }
 
+.round--3 .figtray > * {
+  margin: auto;
+}
+
 /* ---------------------------------------- */
 /* Game: Icon Buttons */
 /* ---------------------------------------- */
 
 .game-icon-button {
-  --default-button-size: 42px;
+  --default-button-size: 2.625em;
 
   align-items: center;
   background-color: var(--axecon-color-2);
@@ -399,21 +399,23 @@ figcaption {
   display: inline-flex;
   height: var(--button-size, var(--default-button-size));
   justify-content: center;
-  outline: 1px solid transparent;
+  outline: 0.063em solid transparent;
   width: var(--button-size, var(--default-button-size));
 }
 
 .game-icon-button.small {
-  --button-size: 24px;
+  --button-size: 1.5em;
 }
 
-.game-icon-button:hover {
+.game-icon-button:hover, 
+.game-icon-button:focus {
   background-color: #fff;
   color: var(--axecon-color-2);
 }
 
 .sample:not(#sample-5) .game-icon-button:focus {
-  outline: 3px solid #0dbaf7;
+  outline: 0.188em solid var(--axecon-color-8);
+  outline-offset: 0.188em;
 }
 
 .game-icon-button svg {
@@ -442,10 +444,11 @@ figcaption {
 
 .game-icon-button + [role="tooltip"] .arrow {
   background-color: var(--tooltip-background-color);
-  height: 8px;
+  box-shadow: 2px 2px 1px var(--axecon-color-2);
+  height: 0.5em;
   position: absolute;
   transform: rotate(45deg);
-  width: 8px;
+  width: 0.5em;
 }
 
 /******************************************

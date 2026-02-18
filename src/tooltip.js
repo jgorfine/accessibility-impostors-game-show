@@ -9,7 +9,7 @@ Stimulus.register("tooltip", class extends Controller {
   position() {
     computePosition(this.buttonTarget, this.tooltipTarget, {
       placement: 'top',
-      middleware: [offset(2), flip(), arrow({element: this.arrowTarget})],
+      middleware: [offset(4), flip(), arrow({element: this.arrowTarget})],
     }).then(({x, y, placement, middlewareData}) => {
       Object.assign(this.tooltipTarget.style, {
         left: `${x}px`,
