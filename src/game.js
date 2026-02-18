@@ -3,11 +3,14 @@ import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/di
 window.Stimulus = Application.start();
 
 Stimulus.register("layout", class extends Controller {
-  static targets = [ "header", "grid" ]
+  static targets = [ "header", "grid", "sampleHeading" ]
 
   captureHeaderHeight() {
     const headerHeight = this.headerTarget.offsetHeight;
     this.gridTarget.style.setProperty('--header-height', `${headerHeight}px`);
+    this.sampleHeadingTargets.forEach((heading) => {
+      heading.style.setProperty('--header-height', `${headerHeight}px`);
+    })
   }
 
   connect() {
