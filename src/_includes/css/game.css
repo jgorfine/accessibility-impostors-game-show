@@ -366,7 +366,7 @@ figcaption {
 @media only screen and (min-width: 500px) {
   .round--3 .grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     height: calc(90dvh - var(--header-height, 7em));
   }
 
@@ -378,7 +378,7 @@ figcaption {
 
 @media only screen and (min-width: 900px) {
   .round--3 .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
 }
@@ -412,7 +412,7 @@ figcaption {
   color: var(--axecon-color-2);
 }
 
-.game-icon-button:focus {
+.sample:not(#sample-5) .game-icon-button:focus {
   outline: 3px solid #0dbaf7;
 }
 
