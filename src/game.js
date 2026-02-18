@@ -133,7 +133,7 @@ Stimulus.register("toolbar", class extends Controller {
 })
 
 Stimulus.register("reveal", class extends Controller {
-  static targets = [ "name", "figure", "figcaption" ]
+  static targets = [ "heading", "figure", "figcaption" ]
   static values = { fizz: Number, bar: Boolean }
 
   toggle() {
@@ -156,7 +156,7 @@ Stimulus.register("reveal", class extends Controller {
     });
 
     if (this.barValue === false) {
-      this.figcaptionTarget.focus();
+      this.headingTarget.focus();
     }
 
     this.barValue = !this.barValue;

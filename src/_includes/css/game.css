@@ -163,6 +163,11 @@ section:has([role="toolbar"]) {
   text-align: center;
 }
 
+.sample__heading:focus {
+  outline: 0.188rem solid var(--axecon-color-9);
+  outline-offset: -1rem;
+}
+
 .sample__content {
   background-color: var(--axecon-color-1);
   display: flex;
@@ -184,7 +189,7 @@ figcaption {
   border-top-color: color-mix(in srgb, var(--axecon-color-1), #fff 25%);
   border-top-style: solid;
   border-top-width: 1px;
-  color: #e7faff;
+  color: var(--axecon-color-9);
   display: block;
   font-size: 1.125em;
   padding: var(--stage-spacing-max);
@@ -192,16 +197,11 @@ figcaption {
 }
 
 .impostor figcaption {
-  background-color: #e7faff;
-  border-top-color: #e7faff;
+  background-color: var(--axecon-color-9);
+  border-top-color: var(--axecon-color-9);
   color: var(--axecon-color-1);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-}
-
-.impostor figcaption:focus {
-  outline: 0.188em solid #000;
-  outline-offset: -0.75em;
 }
 
 .figtray {
