@@ -157,7 +157,7 @@ Stimulus.register("game", class extends Controller {
 })
 
 Stimulus.register("links", class extends Controller {
-  navigate() {
+  navigate(event) {
     window.location.href = event.target.dataset['href'];
   }
 })

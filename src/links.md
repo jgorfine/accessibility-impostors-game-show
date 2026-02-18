@@ -18,17 +18,7 @@ date: 2026-02-16T23:01:00Z
 {% endsample %}
 
 {% sample "3", "Link", true %}
-  <div data-controller="links">
-    <div 
-      data-action="click->links#navigate keydown.enter->links#navigate"
-      data-href="https://www.deque.com/axe-con/schedule/" 
-      class="game-link style--1" 
-      role="link"
-      tabindex="0"
-    >
-      2026 Agenda
-    </div>
-  </div>
+  <a class="game-link style--1" href="https://www.deque.com/axe-con/schedule/" rel="nofollow">2026 Agenda</a>
 {% endsample %}
 
 {% sample "4", "Link", false %}
@@ -37,7 +27,7 @@ date: 2026-02-16T23:01:00Z
       data-action="click->links#navigate" 
       data-href="https://www.deque.com/axe-con/about"
       class="game-link style--2" 
-      role="link"
+      tabindex="0"
     >
       About
     </div>
