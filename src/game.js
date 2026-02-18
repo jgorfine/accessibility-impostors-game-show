@@ -3,7 +3,7 @@ import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/di
 window.Stimulus = Application.start();
 
 Stimulus.register("layout", class extends Controller {
-  static targets = [ "header", "stage", "grid" ]
+  static targets = [ "header", "grid" ]
 
   captureHeaderHeight() {
     const headerHeight = this.headerTarget.offsetHeight;
@@ -144,7 +144,6 @@ Stimulus.register("game", class extends Controller {
         const figcaptionElement = document.createElement("figcaption");
         figcaptionElement.setAttribute("data-game-target", "figcaption");
         const innerElement = document.createElement("span");
-        innerElement.classList.add(!isImpostor && "sr-only");
         innerElement.textContent = isImpostor ? "Impostor" : "Not the impostor";
         figcaptionElement.append(innerElement);
         figure.prepend(figcaptionElement);
