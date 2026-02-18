@@ -27,7 +27,6 @@ date: 2026-02-16T23:01:00Z
       data-action="click->links#navigate" 
       data-href="https://www.deque.com/axe-con/about"
       class="game-link style--2" 
-      tabindex="0"
     >
       About
     </div>

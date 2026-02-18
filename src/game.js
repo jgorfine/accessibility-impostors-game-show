@@ -10,7 +10,7 @@ Stimulus.register("layout", class extends Controller {
     this.gridTarget.style.setProperty('--header-height', `${headerHeight}px`);
     this.sampleHeadingTargets.forEach((heading) => {
       heading.style.setProperty('--header-height', `${headerHeight}px`);
-    })
+    });
   }
 
   connect() {
