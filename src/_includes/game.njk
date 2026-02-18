@@ -109,10 +109,8 @@ layout: "base.njk"
     </section>
   </header>
   <div data-layout-target="stage" id="stage" class="round--{{ count }}">
-    <div class="stage__container">
-      <div class="grid">
-        {{ content | safe }}
-      </div>
+    <div data-layout-target="grid" class="grid">
+      {{ content | safe }}
     </div>
   </div>
   <div data-timer-target="liveregion" role="status" aria-role="polite"></div>

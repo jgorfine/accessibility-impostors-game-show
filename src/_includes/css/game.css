@@ -3,8 +3,6 @@
  ******************************************/
 
 body {
-  --header-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
-
   background-color: var(--axecon-color-2);
 }
 
@@ -14,7 +12,7 @@ body {
 
 header {
   background-color: var(--axecon-color-2);
-  box-shadow: var(--header-box-shadow);
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.15);
   padding: 1em;
   position: sticky;
   top: 0;
@@ -135,21 +133,13 @@ section:has([role="toolbar"]) {
  ******************************************/
 
 #stage {
-  --stage-spacing: clamp(1em, 2cqi, 2em);
+  --stage-spacing-min: 1rem;
+  --stage-spacing-mid: 2cqi;
+  --stage-spacing-max: 2rem;
+  --stage-spacing: clamp(var(--stage-spacing-min), var(--stage-spacing-mid), var(--stage-spacing-max));
 
   background: linear-gradient(180deg, var(--axecon-color-3) -6.43%, var(--axecon-color-4) 100%);
   padding: var(--stage-spacing);
-}
-
-@media only screen and (min-width: 900px) {
-  #stage {
-    height: calc(100dvh - var(--header-height, 7em));
-  }
-}
-
-.stage__container {
-  container: stage / size;
-  height: 100%;
 }
 
 .grid {
@@ -169,7 +159,7 @@ section:has([role="toolbar"]) {
   font-size: clamp(1.25em, 3cqi, 2em);
   font-weight: 400;
   line-height: 1.3;
-  padding: var(--stage-spacing);
+  padding: 1.5rem 1rem;
   text-align: center;
 }
 
@@ -225,10 +215,10 @@ figcaption > span {
  *         GAME STYLES: ROUND #1          *
  ******************************************/
 
-@container stage (width > 900px) {
+@media only screen and (min-width: 900px) {
   .round--1 .grid {
     grid-template-columns: repeat(3, 1fr);
-    height: 100%;
+    height: calc(90dvh - var(--header-height, 7em));
   }
 
   .round--1 .sample {
@@ -289,10 +279,11 @@ figcaption > span {
   margin: auto;
 }
 
-@container stage (width > 500px) {
+@media only screen and (min-width: 500px) {
   .round--2 .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    height: calc(90dvh - var(--header-height, 7em));
   }
 
   .round--2 .sample {
@@ -301,11 +292,10 @@ figcaption > span {
   }
 }
 
-@container stage (width > 900px){
+@media only screen and (min-width: 900px) {
   .round--2 .grid {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    height: 100%;
   }
 }
 
@@ -370,10 +360,11 @@ figcaption > span {
   margin: auto;
 }
 
-@container stage (width > 500px) {
+@media only screen and (min-width: 500px) {
   .round--3 .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    height: calc(90dvh - var(--header-height, 7em));
   }
 
   .round--3 .sample {
@@ -382,11 +373,10 @@ figcaption > span {
   }
 }
 
-@container stage (width > 900px) {
+@media only screen and (min-width: 900px) {
   .round--3 .grid {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    height: 100%;
   }
 }
 
@@ -459,24 +449,11 @@ figcaption > span {
  *         GAME STYLES: ROUND #4          *
  ******************************************/
  
-@container stage (width > 900px) {
+@media only screen and (min-width: 900px) and (min-height: 900px) {
   .round--4 .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    height: 100%;
-  }
-
-  .round--4 .sample {
-    max-height: 100%;
-    overflow: hidden;
-  }
-}
-
-@container stage (width > 900px) and (height < 900px) {
-  .round--4 .grid {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1fr;
-    height: 100%;
+    height: calc(90dvh - var(--header-height, 7em));
   }
 
   .round--4 .sample {

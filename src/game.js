@@ -3,11 +3,11 @@ import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/di
 window.Stimulus = Application.start();
 
 Stimulus.register("layout", class extends Controller {
-  static targets = [ "header", "stage" ]
+  static targets = [ "header", "stage", "grid" ]
 
   captureHeaderHeight() {
     const headerHeight = this.headerTarget.offsetHeight;
-    this.stageTarget.style.setProperty('--header-height', `${headerHeight}px`);
+    this.gridTarget.style.setProperty('--header-height', `${headerHeight}px`);
   }
 
   connect() {
