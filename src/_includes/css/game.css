@@ -502,7 +502,7 @@ figcaption {
 
   background-color: #fff;
   font-size: 1rem;
-  padding: 1em;
+  padding: var(--stage-spacing-max);
   width: min(100%, 45em);
 }
 
