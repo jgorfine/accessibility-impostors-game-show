@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
     {% set css %}
       {% include "css/base.css" %}
+      {% if layout === "splash.njk"  %}
+      {% include "css/splash.css" %}
+      {% endif %}
       {% if tags and 'game' in tags  %}
       {% include "css/game.css" %}
       {% endif %}
@@ -28,20 +31,5 @@
   </head>
   <body>
     {{ content | safe }}
-    <!-- <footer role="contentinfo">
-      <nav aria-label="The Accessibility Impostors Game Show">
-        <a href="/">{{ site.name }}</a>
-        <ol>
-          {%- for round in collections.game -%}
-          <li>
-            <a href="{{round.url}}" {% if page.url == round.url %} aria-current="page"{% endif %}>{{ round.data.h1 }}</a>
-          </li>
-          {%- endfor -%}
-        </ol>
-      </nav>
-      <a href="https://www.deque.com/axe-con/">
-        <img src="img/axe-con-logo.svg" alt="axe-con 2026">
-      </a>
-    </footer> -->
   </body>
 </html>
