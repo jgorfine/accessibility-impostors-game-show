@@ -200,8 +200,8 @@ figcaption {
 }
 
 .impostor figcaption:focus {
-  /* outline: 0.188em solid var(--axecon-color-6); */
-  /* outline-offset: 0.188em; */
+  outline: 0.188em solid #000;
+  outline-offset: -0.75em;
 }
 
 .figtray {
@@ -287,7 +287,7 @@ figcaption {
  *         GAME STYLES: ROUND #2          *
  ******************************************/
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 31.25em) {
   .round--2 .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -304,7 +304,7 @@ figcaption {
   }
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 56.25em) {
   .round--2 .grid {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -372,11 +372,11 @@ figcaption {
  *         GAME STYLES: ROUND #3          *
  ******************************************/
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 31.25em) {
   .round--3 .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    height: calc(90dvh - var(--header-height, 7em));
+    height: calc(100dvh - var(--header-height, 7em));
   }
 
   .round--3 .sample {
@@ -389,10 +389,11 @@ figcaption {
   }
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 56.25em) {
   .round--3 .grid {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    height: calc(90dvh - var(--header-height, 7em))
   }
 }
 
@@ -472,7 +473,7 @@ figcaption {
  *         GAME STYLES: ROUND #4          *
  ******************************************/
  
-@media only screen and (min-width: 900px) and (min-height: 900px) {
+@media only screen and (min-width: 56.25em) and (min-height: 56.25em) {
   .round--4 .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
