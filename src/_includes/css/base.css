@@ -3,6 +3,7 @@
 }
 
 :root {
+  --axecon-color-0: #1e1e1e;
   --axecon-color-1: #002c3f;
   --axecon-color-2: #003349;
   --axecon-color-3: #801bd0;
@@ -16,71 +17,40 @@
 body {
   background-color: var(--axecon-color-1);
   color: #fff;
-  display: flex;
-  flex-direction: column;
   font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
-  font-size: clamp(1em, 4cqi, 2em);
   font-weight: 400;
+  font-size: 16px;
   font-style: normal;
   font-variation-settings: "wdth" 100;
-  height: 100dvh;
   margin: 0;
-  overflow: auto;
 }
 
-main {
-  display: flex;
-  flex: 1 1 100%;
-  justify-content: center;
-  padding: 1em;
-  text-align: center;
-}
-
-.container {
-  margin: auto;
-}
-
-h1 {
-  font-size: 2.5em;
-  font-weight: 600;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-  line-height: 1.2;
-  margin: 0;
-  overflow-wrap: anywhere;
-  text-wrap: balance;
-}
-
-h1 a {
-  color: inherit;
-  line-height: inherit;
-  text-underline-offset: 0.075em;
-  text-decoration-thickness: 0.05em;
-}
-
+h1, h2, h3, 
+h4, h5, h6, 
 p {
-  font-size: 1.25em;
-  line-height: 1.4;
-  margin: 1.5em 0 0;
-  text-wrap: balance;
+  margin: 0;
 }
 
-footer {
-  flex: none;
-  padding: 1em;
-  text-align: center;
+button {
+  appearance: none;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
 }
 
-footer a {
-  display: inline-block;
-  font-size: 1em;
-  height: auto;
-  width: min(100%, 9em);
+[hidden] {
+  display: none !important;
 }
 
-footer a img {
-  display: block;
-  height: auto; 
-  width: 100%;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

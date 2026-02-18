@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      simplycountdown.js:
+        specifier: ^3.0.1
+        version: 3.0.1
     devDependencies:
       '@11ty/eleventy':
         specifier: ^3.1.2
@@ -494,6 +498,9 @@ packages:
 
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
+
+  simplycountdown.js@3.0.1:
+    resolution: {integrity: sha512-uEp86TFh75CEBFA0786VXze6Gr/hYvNOVYsoO4mQeiT9c6rcAjdQGkDwP2FloNbzyV4WbiJntb3E6Sbx1EsQcA==}
 
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
@@ -1045,6 +1052,8 @@ snapshots:
       - supports-color
 
   setprototypeof@1.2.0: {}
+
+  simplycountdown.js@3.0.1: {}
 
   slash@3.0.0: {}
 
