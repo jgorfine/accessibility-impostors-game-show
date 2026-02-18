@@ -38,9 +38,9 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPairedShortcode("sample", function(content, count, type, isImpostor, controller) {
     return `<section id="sample-${count}" class="sample" aria-labelledby="sample-${count}__heading" role="region">
-<h2 data-game-target="name" id="sample-${count}__heading" class="sample__heading">${type} #${count}</h2>
+<h2 data-reveal-target="name" id="sample-${count}__heading" class="sample__heading" tabindex="-1">${type} #${count}</h2>
 <div class="sample__content">
-<figure data-game-target="figure">
+<figure data-reveal-target="figure">
 <div class="figtray" ${controller ? `data-controller="${controller}"` : ''}>${content}</figtray>
 </figure>
 </div>

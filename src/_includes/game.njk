@@ -2,7 +2,7 @@
 layout: "base.njk"
 ---
 
-<main data-controller="layout game" data-game-fizz-value="{{ impostor }}" data-game-bar-value="false">
+<main data-controller="layout reveal" data-reveal-fizz-value="{{ impostor }}" data-reveal-bar-value="false">
   <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight" data-controller="timer">
     <h1>{{ h1 }}</h1>
     <section 
@@ -84,9 +84,8 @@ layout: "base.njk"
         </button>
         <!-- Impostor reveal toggle -->
         <button 
-          data-game-target="foo"
           data-toolbar-target="control" 
-          data-action="game#toggle toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          data-action="reveal#toggle toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="impostor-toggle"
           tabindex="-1" 
           aria-checked="false" 

@@ -97,7 +97,7 @@ Stimulus.register("toolbar", class extends Controller {
 
   next() {
     const visibleControls = this.controlTargets;
-    console.log("next, visible controls", visibleControls);
+    // console.log("next, visible controls", visibleControls);
     const newIndex = (this.indexValue + 1) % visibleControls.length;
     this.indexValue = newIndex;
     this.focusControl();
@@ -105,7 +105,7 @@ Stimulus.register("toolbar", class extends Controller {
 
   prev() {
     const visibleControls = this.controlTargets;
-    console.log("prev, visible controls", visibleControls);
+    // console.log("prev, visible controls", visibleControls);
     const newIndex = ((this.indexValue - 1) + visibleControls.length) % visibleControls.length;
     this.indexValue = newIndex;
     this.focusControl();
@@ -132,8 +132,8 @@ Stimulus.register("toolbar", class extends Controller {
   }
 })
 
-Stimulus.register("game", class extends Controller {
-  static targets = [ "foo", "name", "figure", "figcaption" ]
+Stimulus.register("reveal", class extends Controller {
+  static targets = [ "name", "figure", "figcaption" ]
   static values = { fizz: Number, bar: Boolean }
 
   toggle() {
@@ -142,15 +142,22 @@ Stimulus.register("game", class extends Controller {
         const isImpostor = index + 1 === this.fizzValue;
         figure.classList.add(isImpostor && "impostor");
         const figcaptionElement = document.createElement("figcaption");
-        figcaptionElement.setAttribute("data-game-target", "figcaption");
-        const innerElement = document.createElement("span");
-        innerElement.textContent = isImpostor ? "Impostor" : "Not the impostor";
-        figcaptionElement.append(innerElement);
-        figure.prepend(figcaptionElement);
+        let text = "not the impostor";
+        if (isImpostor) {
+          figcaptionElement.setAttribute("data-reveal-target", "figcaption");
+          figcaptionElement.tabIndex = -1;
+          text = "Impostor";
+        }
+        figcaptionElement.textContent = text;
+        figure.append(figcaptionElement);
       } else {
         figure.querySelector("figcaption").hidden = this.barValue;
       }
     });
+
+    if (this.barValue === false) {
+      this.figcaptionTarget.focus();
+    }
 
     this.barValue = !this.barValue;
   }
@@ -170,7 +177,6 @@ Stimulus.register("filters", class extends Controller {
     this.expandedValue = !this.expandedValue;
     this.filtersTarget.hidden = !this.expandedValue;
     if (this.expandedValue === true && this.toggleTarget.hasAttribute('aria-expanded')) {
-      console.log(this.tracksTarget);
       this.tracksTarget.focus();
     }
   }

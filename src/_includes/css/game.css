@@ -163,10 +163,6 @@ section:has([role="toolbar"]) {
   text-align: center;
 }
 
-.sample:has(figcaption:not(hidden)) .sample__heading {
-  box-shadow: var(--header-box-shadow);
-}
-
 .sample__content {
   background-color: var(--axecon-color-1);
   display: flex;
@@ -185,19 +181,27 @@ figure {
 }
 
 figcaption {
-  color: #f8f2fe;
-  display: inline-block;
-  font-size: 1em;
-  margin: 1em 0 0;
-  padding: 1em 1.5em;
+  border-top-color: color-mix(in srgb, var(--axecon-color-1), #fff 25%);
+  border-top-style: solid;
+  border-top-width: 1px;
+  color: #e7faff;
+  display: block;
+  font-size: 1.125em;
+  padding: var(--stage-spacing-max);
   text-align: center;
 }
 
 .impostor figcaption {
-  background-color: #f8f2fe;
+  background-color: #e7faff;
+  border-top-color: #e7faff;
   color: var(--axecon-color-1);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.impostor figcaption:focus {
+  /* outline: 0.188em solid var(--axecon-color-6); */
+  /* outline-offset: 0.188em; */
 }
 
 .figtray {
@@ -206,6 +210,7 @@ figcaption {
   display: flex;
   flex: 1 1 auto;
   justify-content: center;
+  min-height: 25dvh;
   overflow: auto;
   padding: var(--stage-spacing);
   position: relative;
@@ -228,6 +233,10 @@ figcaption {
   .round--1 .sample {
     max-height: 100%;
     overflow: hidden;
+  }
+
+  .round--1 .figtray {
+    min-height: unset;
   }
 }
 
@@ -288,6 +297,10 @@ figcaption {
   .round--2 .sample {
     max-height: 100%;
     overflow: hidden;
+  }
+
+  .round--2 .figtray {
+    min-height: unset;
   }
 }
 
@@ -369,6 +382,10 @@ figcaption {
   .round--3 .sample {
     max-height: 100%;
     overflow: hidden;
+  }
+
+  .round--3 .figtray {
+    min-height: unset;
   }
 }
 
@@ -468,6 +485,7 @@ figcaption {
   }
 
   .round--4 .figtray {
+    min-height: unset;
     padding-block-start: 4em;
   }
 }
