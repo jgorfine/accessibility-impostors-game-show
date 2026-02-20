@@ -46,6 +46,37 @@ Stimulus.register("layout", class extends Controller {
   }
 })
 
+Stimulus.register("audioSetting", class extends Controller {
+  static targets = [ "audioSwitch", "audioElement", "timerSwitchLabel" ]
+
+  initialize() {
+    if (storageAvailable("localStorage") && !localStorage.getItem("aigs-audio")) {
+      localStorage.setItem("aigs-audio", "false");
+    }
+  }
+
+  audioSwitchTargetConnected(target) {
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
+      target.setAttribute('aria-checked', localStorage.getItem("aigs-audio"));
+    }
+  }
+
+  audioElementTargetConnected(target) {
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
+      target.muted = localStorage.getItem("aigs-audio") === "false";
+    }
+  }
+
+  toggle() {
+    const isChecked = this.audioSwitchTarget.getAttribute("aria-checked") === "true";
+    this.audioSwitchTarget.setAttribute('aria-checked', !isChecked);
+    this.audioElementTarget.muted = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
+      localStorage.setItem("aigs-audio", !isChecked);
+    }
+  }
+})
+
 /**
  * Timer formatting credit
  * @author JavaScript Development Space
@@ -53,8 +84,14 @@ Stimulus.register("layout", class extends Controller {
  */
 
 Stimulus.register("timer", class extends Controller {
-  static targets = [ "switch", "display", "audioElement", "announcement", "liveregion" ]
-  static values = { active: Boolean }
+  static targets = [ 
+    "switchSetting", 
+    "switchActive", 
+    "display", 
+    "audioElement", 
+    "announcement", 
+    "liveregion" 
+  ]
 
   formatMMSS(time) {
     if (isNaN(time) || time < 0) return "00:00";
@@ -85,6 +122,18 @@ Stimulus.register("timer", class extends Controller {
     );
   }
 
+  initialize() {
+    if (storageAvailable("localStorage") && !localStorage.getItem("aigs-timer")) {
+      localStorage.setItem("aigs-timer", "true");
+    }
+  }
+
+  switchSettingTargetConnected(target) {
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
+      target.setAttribute('aria-checked', localStorage.getItem("aigs-timer"));
+    }
+  }
+
   connect() {
     this.countdown = new Countdown().setDuration(180);
 
@@ -94,7 +143,7 @@ Stimulus.register("timer", class extends Controller {
     };
 
     this.countdown.onCompleted = () => {
-      this.switchTarget.setAttribute("aria-checked", "false");
+      this.switchActiveTarget.setAttribute("aria-checked", "false");
       this.liveregionTarget.textContent = "Time's up! Use 'Reveal impostor' button to see the answer.";
     };
   }
@@ -112,43 +161,24 @@ Stimulus.register("timer", class extends Controller {
   reset() {
     this.countdown.reset();
     this.audioElementTarget.currentTime = 0;
+    this.displayTarget.textContent = this.formatMMSS(180);
+    this.announcementTarget.textContent = this.formatHumanReadable(180);
+    this.switchActiveTarget.setAttribute("aria-checked", "false");
   }
 
-  toggle() {
-    const isChecked = this.switchTarget.getAttribute('aria-checked') === 'true';
-    !isChecked ? this.start() : this.pause();
-    this.switchTarget.setAttribute('aria-checked', !isChecked);
-  }
-})
-
-Stimulus.register("audioSetting", class extends Controller {
-  static targets = [ "audioSwitch", "audioElement", "timerSwitchLabel" ]
-
-  initialize() {
-    if (storageAvailable("localStorage") && !localStorage.getItem("aigs-audio")) {
-      localStorage.setItem("aigs-audio", "false");
-    }
+  toggleActive() {
+    const isChecked = this.switchActiveTarget.getAttribute("aria-checked") === "true";
+    this.switchActiveTarget.setAttribute('aria-checked', !isChecked);
+    isChecked ? this.pause() : this.start();
   }
 
-  audioSwitchTargetConnected(target) {
-    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
-      target.setAttribute('aria-checked', localStorage.getItem("aigs-audio"));
-    }
-  }
-
-  audioElementTargetConnected(target) {
-    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
-      target.muted = localStorage.getItem("aigs-audio") === "false";
-    }
-  }
-
-  toggle() {
-    const isChecked = this.audioSwitchTarget.getAttribute('aria-checked') === 'true';
-    this.audioSwitchTarget.setAttribute('aria-checked', !isChecked);
-    this.audioElementTarget.muted = this.audioSwitchTarget.getAttribute('aria-checked') === 'false';
-
-    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
-      localStorage.setItem("aigs-audio", !isChecked);
+  toggleSetting() {
+    const isChecked = this.switchSettingTarget.getAttribute("aria-checked") === "true";
+    this.switchSettingTarget.setAttribute('aria-checked', !isChecked);
+    this.pause();
+    this.reset();
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
+      localStorage.setItem("aigs-timer", !isChecked);
     }
   }
 })
