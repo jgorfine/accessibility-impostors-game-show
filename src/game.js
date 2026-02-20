@@ -29,7 +29,7 @@ Stimulus.register("layout", class extends Controller {
  */
 
 Stimulus.register("timer", class extends Controller {
-  static targets = [ "switch", "display", "announcement", "liveregion" ]
+  static targets = [ "switch", "display", "audioToggle", "audioElement", "announcement", "liveregion" ]
   static values = { active: Boolean }
 
   formatMMSS(time) {
@@ -77,20 +77,32 @@ Stimulus.register("timer", class extends Controller {
 
   start() {
     this.countdown.start();
+    this.audioElementTarget.play();
   }
 
   pause() {
     this.countdown.pause();
+    this.audioElementTarget.pause();
   }
 
   reset() {
     this.countdown.reset();
+    this.audioElementTarget.currentTime = 0;
   }
 
   toggle() {
     const isChecked = this.switchTarget.getAttribute('aria-checked') === 'true';
     !isChecked ? this.start() : this.pause();
     this.switchTarget.setAttribute('aria-checked', !isChecked);
+  }
+})
+
+Stimulus.register("audio", class extends Controller {
+  static targets = [ "audioToggle", "audioElement" ]
+
+  toggle() {
+    const isChecked = this.audioToggleTarget.getAttribute('aria-checked') === 'true';
+    this.audioElementTarget.muted = isChecked;
   }
 })
 

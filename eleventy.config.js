@@ -51,6 +51,10 @@ export default function (eleventyConfig) {
     mode: "html-relative"
   });
 
+  eleventyConfig.addPassthroughCopy("**/*.mp3", {
+    mode: "html-relative"
+  });
+
   eleventyConfig.addPassthroughCopy("src/*.js", {
     mode: "html-relative"
   });

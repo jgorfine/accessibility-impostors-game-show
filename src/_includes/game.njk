@@ -2,8 +2,8 @@
 layout: "base.njk"
 ---
 
-<main data-controller="layout reveal" data-reveal-fizz-value="{{ impostor }}" data-reveal-bar-value="false">
-  <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight" data-controller="timer">
+<main data-controller="layout timer audio reveal" data-reveal-fizz-value="{{ impostor }}" data-reveal-bar-value="false">
+  <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight">
     <h1>{{ h1 }}</h1>
     <section 
       data-timer-active-value="false" 
@@ -34,33 +34,35 @@ layout: "base.njk"
           <path d="M360-840v-80h240v80H360Zm-19.5 731.5Q275-137 226-186t-77.5-114.5Q120-366 120-440t28.5-139.5Q177-645 226-694t114.5-77.5Q406-800 480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80q-74 0-139.5-28.5ZM678-242q82-82 82-198t-82-198q-82-82-198-82t-198 82q-82 82-82 198t82 198q82 82 198 82t198-82ZM480-440ZM360-280h80v-320h-80v320Zm160 0h80v-320h-80v320Z"/>
         </svg>
         <!-- Timer toggle | Label -->
-        <span class="sr-only">Timer</span>
+        <span class="sr-only">Timer (no music)</span>
       </button>
     </section>
     <section id="settings" aria-labelledby="settings__heading" role="region">
       <h2 id="settings__heading" class="sr-only">Game settings</h2>
       <div data-controller="toolbar" data-toolbar-index-value="0" aria-labelledby="settings__heading" role="toolbar">
-        <!-- Music toggle -->
-        <!-- <button 
-          data-toolbar-target="control" 
-          data-action="toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
+        <!-- Audio toggle -->
+        <button 
+          data-toolbar-target="control"
+          data-audio-target="audioToggle"
+          data-timer-target="audioToggle" 
+          data-action="audio#toggle toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="timer-music-toggle"
           tabindex="0" 
           aria-checked="false" 
           role="switch" 
           type="button"
-        > -->
+        >
           <!-- Music toggle | On icon -->
-          <!-- <svg class="button__icon--on" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
+          <svg class="button__icon--on" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
             <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/>
-          </svg> -->
+          </svg>
           <!-- Music toggle | Off icon -->
-          <!-- <svg class="button__icon--off" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
+          <svg class="button__icon--off" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
             <path d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"/>
-          </svg> -->
+          </svg>
           <!-- Music toggle | Label -->
-          <!-- <span class="sr-only">Timer music</span> -->
-        <!-- </button> -->
+          <span class="sr-only">Timer music</span>
+        </button>
         <!-- Time limit toggle -->
         <button 
           data-toolbar-target="control" 
@@ -104,7 +106,6 @@ layout: "base.njk"
           <span class="sr-only">Reveal impostor</span>
         </button>
       </div>
-      <audio></audio>
     </section>
   </header>
   <div id="stage" class="round--{{ count }}">
@@ -112,7 +113,15 @@ layout: "base.njk"
       {{ content | safe }}
     </div>
   </div>
-  <div data-timer-target="liveregion" role="status" aria-live="polite"></div>
+  <audio 
+    data-audio-target="audioElement" 
+    data-timer-target="audioElement" 
+    id="timer-audio" 
+    src="media/dark-alley-deals.mp3" 
+    preload="auto" 
+    muted
+  ></audio>
+  <div data-timer-target="liveregion" class="sr-only" role="status" aria-live="polite"></div>
 </main>
 <!-- <footer role="contentinfo">
   <nav aria-label="The Accessibility Impostors Game Show">
