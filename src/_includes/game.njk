@@ -2,17 +2,21 @@
 layout: "base.njk"
 ---
 
-<main data-controller="layout timer audio reveal" data-reveal-fizz-value="{{ impostor }}" data-reveal-bar-value="false">
+<main 
+  data-controller="layout settings timer audioSetting reveal" 
+  data-reveal-fizz-value="{{ impostor }}" 
+  data-reveal-bar-value="false"
+>
   <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight">
     <h1>{{ h1 }}</h1>
     <section 
       data-timer-active-value="false" 
       id="timer" 
-      aria-labelledby="__heading" 
+      aria-labelledby="timer__heading" 
       role="region"
       tabindex="-1"
     >
-      <h2 id="__heading" class="sr-only">Round timer</h2>
+      <h2 id="timer__heading" class="sr-only">Round timer</h2>
       <div role="timer">
         <span data-timer-target="display" aria-hidden="true">03:00</span>
         <span data-timer-target="announcement" class="sr-only">3 minutes</span>
@@ -34,7 +38,7 @@ layout: "base.njk"
           <path d="M360-840v-80h240v80H360Zm-19.5 731.5Q275-137 226-186t-77.5-114.5Q120-366 120-440t28.5-139.5Q177-645 226-694t114.5-77.5Q406-800 480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80q-74 0-139.5-28.5ZM678-242q82-82 82-198t-82-198q-82-82-198-82t-198 82q-82 82-82 198t82 198q82 82 198 82t198-82ZM480-440ZM360-280h80v-320h-80v320Zm160 0h80v-320h-80v320Z"/>
         </svg>
         <!-- Timer toggle | Label -->
-        <span data-audio-target="timerSwitchLabel" class="sr-only">Timer (without music)</span>
+        <span data-audioSetting-target="timerSwitchLabel" class="sr-only">Timer (without music)</span>
       </button>
     </section>
     <section id="settings" aria-labelledby="settings__heading" role="region">
@@ -43,8 +47,8 @@ layout: "base.njk"
         <!-- Audio toggle -->
         <button 
           data-toolbar-target="control"
-          data-audio-target="audioSwitch"
-          data-action="audio#toggle toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          data-audioSetting-target="audioSwitch"
+          data-action="audioSetting#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="timer-music-toggle"
           tabindex="0" 
           aria-checked="false" 
@@ -65,7 +69,7 @@ layout: "base.njk"
         <!-- Time limit toggle -->
         <button 
           data-toolbar-target="control" 
-          data-action="toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          data-action="keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="time-limit-toggle"
           tabindex="-1" 
           aria-checked="true" 
@@ -113,7 +117,7 @@ layout: "base.njk"
     </div>
   </div>
   <audio 
-    data-audio-target="audioElement" 
+    data-audioSetting-target="audioElement" 
     data-timer-target="audioElement" 
     id="timer-audio" 
     src="media/dark-alley-deals.mp3" 

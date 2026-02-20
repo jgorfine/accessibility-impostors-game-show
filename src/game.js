@@ -1,5 +1,29 @@
 import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
 
+/**
+ * Check if browser storage is available
+ * @author MDN Web Docs
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability|Testing for availability}
+ */
+const storageAvailable = (type) => {
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      e.name === "QuotaExceededError" &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
 window.Stimulus = Application.start();
 
 Stimulus.register("layout", class extends Controller {
@@ -97,13 +121,35 @@ Stimulus.register("timer", class extends Controller {
   }
 })
 
-Stimulus.register("audio", class extends Controller {
+Stimulus.register("audioSetting", class extends Controller {
   static targets = [ "audioSwitch", "audioElement", "timerSwitchLabel" ]
+
+  initialize() {
+    if (storageAvailable("localStorage") && !localStorage.getItem("aigs-audio")) {
+      localStorage.setItem("aigs-audio", "false");
+    }
+  }
+
+  audioSwitchTargetConnected(target) {
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
+      target.setAttribute('aria-checked', localStorage.getItem("aigs-audio"));
+    }
+  }
+
+  audioElementTargetConnected(target) {
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
+      target.muted = localStorage.getItem("aigs-audio") === "false";
+    }
+  }
 
   toggle() {
     const isChecked = this.audioSwitchTarget.getAttribute('aria-checked') === 'true';
-    this.audioElementTarget.muted = isChecked;
-    this.timerSwitchLabelTarget.textContent = !isChecked ? "Timer (with music)" : "Timer (without music)";
+    this.audioSwitchTarget.setAttribute('aria-checked', !isChecked);
+    this.audioElementTarget.muted = this.audioSwitchTarget.getAttribute('aria-checked') === 'false';
+
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
+      localStorage.setItem("aigs-audio", !isChecked);
+    }
   }
 })
 
@@ -125,12 +171,6 @@ Stimulus.register("toolbar", class extends Controller {
     const newIndex = ((this.indexValue - 1) + visibleControls.length) % visibleControls.length;
     this.indexValue = newIndex;
     this.focusControl();
-  }
-
-  toggle(event) {
-    const switchElement = event.target.closest("[role='switch']");
-    const isChecked = switchElement.getAttribute('aria-checked') === 'true';
-    switchElement.setAttribute('aria-checked', !isChecked);
   }
 
   focusControl() {
