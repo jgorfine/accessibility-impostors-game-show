@@ -58,6 +58,7 @@ Stimulus.register("audio", class extends Controller {
   audioSwitchTargetConnected(target) {
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
       target.setAttribute('aria-checked', localStorage.getItem("aigs-audio"));
+      this.timerSwitchLabelTarget.textContent = localStorage.getItem("aigs-audio") === "true" ? "Timer (with music)" : "Timer (without music)";
     }
   }
 
@@ -71,6 +72,7 @@ Stimulus.register("audio", class extends Controller {
     const isChecked = this.audioSwitchTarget.getAttribute("aria-checked") === "true";
     this.audioSwitchTarget.setAttribute('aria-checked', !isChecked);
     this.audioElementTarget.muted = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
+    this.timerSwitchLabelTarget.textContent = !isChecked ? "Timer (with music)" : "Timer (without music)";
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
       localStorage.setItem("aigs-audio", !isChecked);
     }
