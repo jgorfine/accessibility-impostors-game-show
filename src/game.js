@@ -46,7 +46,7 @@ Stimulus.register("layout", class extends Controller {
   }
 })
 
-Stimulus.register("audioSetting", class extends Controller {
+Stimulus.register("audio", class extends Controller {
   static targets = [ "audioSwitch", "audioElement", "timerSwitchLabel" ]
 
   initialize() {
