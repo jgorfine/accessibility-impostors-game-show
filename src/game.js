@@ -47,7 +47,13 @@ Stimulus.register("layout", class extends Controller {
 })
 
 Stimulus.register("audio", class extends Controller {
-  static targets = [ "audioSwitch", "audioElement", "timerSwitchLabel" ]
+  static targets = [ 
+    "audioSwitch", 
+    "audioVolumeDown",
+    "audioVolumeUp", 
+    "audioElement", 
+    "timerSwitchLabel" 
+  ]
 
   initialize() {
     if (storageAvailable("localStorage") && !localStorage.getItem("aigs-audio")) {
@@ -58,11 +64,14 @@ Stimulus.register("audio", class extends Controller {
   audioSwitchTargetConnected(target) {
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
       target.setAttribute('aria-checked', localStorage.getItem("aigs-audio"));
+      this.audioVolumeUpTarget.hidden = localStorage.getItem("aigs-audio") === "false";
+      this.audioVolumeDownTarget.hidden = localStorage.getItem("aigs-audio") === "false";
       this.timerSwitchLabelTarget.textContent = localStorage.getItem("aigs-audio") === "true" ? "Timer (with music)" : "Timer (without music)";
     }
   }
 
   audioElementTargetConnected(target) {
+    target.volume = 0.5;
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
       target.muted = localStorage.getItem("aigs-audio") === "false";
     }
@@ -72,6 +81,8 @@ Stimulus.register("audio", class extends Controller {
     const isChecked = this.audioSwitchTarget.getAttribute("aria-checked") === "true";
     this.audioSwitchTarget.setAttribute('aria-checked', !isChecked);
     this.audioElementTarget.muted = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
+    this.audioVolumeUpTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
+    this.audioVolumeDownTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
     this.timerSwitchLabelTarget.textContent = !isChecked ? "Timer (with music)" : "Timer (without music)";
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
       localStorage.setItem("aigs-audio", !isChecked);
