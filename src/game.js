@@ -235,18 +235,25 @@ Stimulus.register("toolbar", class extends Controller {
   static targets = [ "control" ]
   static values = { index: Number }
 
+  controlTargetConnected(target) {
+    if (target.hidden === true) {
+      target.tabIndex = "-1";
+      if (target.nextElementSibling.hidden !== true) {
+        target.nextElementSibling.tabIndex = "0";
+      }
+    }
+  }
+
   next() {
-    const visibleControls = this.controlTargets;
-    // console.log("next, visible controls", visibleControls);
-    const newIndex = (this.indexValue + 1) % visibleControls.length;
+    const allControls = this.controlTargets;
+    const newIndex = (this.indexValue + 1) % allControls.length;
     this.indexValue = newIndex;
     this.focusControl();
   }
 
   prev() {
-    const visibleControls = this.controlTargets;
-    // console.log("prev, visible controls", visibleControls);
-    const newIndex = ((this.indexValue - 1) + visibleControls.length) % visibleControls.length;
+    const allControls = this.controlTargets;
+    const newIndex = ((this.indexValue - 1) + allControls.length) % allControls.length;
     this.indexValue = newIndex;
     this.focusControl();
   }
