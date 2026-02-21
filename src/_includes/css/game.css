@@ -166,8 +166,15 @@ section:has([role="toolbar"]) {
 }
 
 .sample {
+  border-bottom-color: var(--axecon-color-1);
+  border-bottom-style: solid;
+  border-bottom-width: 0.25rem;
   display: flex;
   flex-direction: column;
+}
+
+.sample:has(.impostor figcaption:not([hidden])) {
+  border-bottom-color: #fff;
 }
 
 .sample__heading {
@@ -184,7 +191,7 @@ section:has([role="toolbar"]) {
 
 .sample__heading:focus {
   outline: 0.188rem solid var(--axecon-color-9);
-  outline-offset: -1rem;
+  outline-offset: -0.3em;
 }
 
 .sample__content {
@@ -207,11 +214,11 @@ figure {
 figcaption {
   border-top-color: color-mix(in srgb, var(--axecon-color-1), #fff 25%);
   border-top-style: solid;
-  border-top-width: 1px;
+  border-top-width: 0.0625rem;
   color: var(--axecon-color-9);
   display: block;
   font-size: 1.125em;
-  padding: var(--stage-spacing-max);
+  padding: max(1rem, 2cqb) max(0.75rem, 1cqi);
   text-align: center;
 }
 
