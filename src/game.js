@@ -54,10 +54,16 @@ Stimulus.register("audio", class extends Controller {
     "audioElement", 
     "timerSwitchLabel" 
   ]
+  static values = { volume: Number }
 
   initialize() {
-    if (storageAvailable("localStorage") && !localStorage.getItem("aigs-audio")) {
-      localStorage.setItem("aigs-audio", "false");
+    if (storageAvailable("localStorage")) {
+      if (!localStorage.getItem("aigs-audio")) {
+        localStorage.setItem("aigs-audio", "false");
+      }
+      if (!localStorage.getItem("aigs-volume")) {
+        localStorage.setItem("aigs-volume", this.volumeValue);
+      }
     }
   }
 
@@ -71,9 +77,14 @@ Stimulus.register("audio", class extends Controller {
   }
 
   audioElementTargetConnected(target) {
-    target.volume = 0.5;
-    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
-      target.muted = localStorage.getItem("aigs-audio") === "false";
+    if (storageAvailable("localStorage")) {
+      if (localStorage.getItem("aigs-audio")) {
+        target.muted = localStorage.getItem("aigs-audio") === "false";
+      }
+      if (localStorage.getItem("aigs-volume")) {
+        target.volume = localStorage.getItem("aigs-volume");
+        this.volumeValue = localStorage.getItem("aigs-volume");
+      }
     }
   }
 
@@ -87,6 +98,30 @@ Stimulus.register("audio", class extends Controller {
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
       localStorage.setItem("aigs-audio", !isChecked);
     }
+  }
+
+  turnVolumeDown() {
+    if (this.volumeValue > 0) {
+      const newVolume = (this.volumeValue - 0.1).toFixed(1);
+      this.volumeValue = newVolume;
+      if (storageAvailable("localStorage") && localStorage.getItem("aigs-volume")) {
+        localStorage.setItem("aigs-volume", newVolume);
+      }
+    }
+  }
+
+  turnVolumeUp() {
+    if (this.volumeValue < 1) {
+      const newVolume = (this.volumeValue + 0.1).toFixed(1);
+      this.volumeValue = newVolume;
+      if (storageAvailable("localStorage") && localStorage.getItem("aigs-volume")) {
+        localStorage.setItem("aigs-volume", newVolume);
+      }
+    }
+  }
+
+  volumeValueChanged(currentValue, previousValue) {
+    this.audioElementTarget.volume = currentValue;
   }
 })
 

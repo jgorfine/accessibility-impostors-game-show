@@ -4,6 +4,7 @@ layout: "base.njk"
 
 <main 
   data-controller="layout settings audio timer timerRunning reveal" 
+  data-audio-volume-value="0.5"
   data-reveal-fizz-value="{{ impostor }}" 
   data-reveal-bar-value="false"
 >
@@ -47,7 +48,7 @@ layout: "base.njk"
         <button 
           data-toolbar-target="control"
           data-audio-target="audioVolumeDown"
-          data-action="keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          data-action="audio#turnVolumeDown keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="timer-music-volume-down"
           tabindex="-1" 
           type="button"
@@ -64,7 +65,7 @@ layout: "base.njk"
         <button 
           data-toolbar-target="control"
           data-audio-target="audioVolumeUp"
-          data-action="keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          data-action="audio#turnVolumeUp keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="timer-music-volume-up"
           tabindex="-1" 
           type="button"
@@ -97,7 +98,7 @@ layout: "base.njk"
             <path d="M792-56 56-792l56-56 736 736-56 56ZM560-514l-80-80v-246h240v160H560v166ZM400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-62l80 80v120q0 66-47 113t-113 47Z"/>
           </svg>
           <!-- Music toggle | Label -->
-          <span class="sr-only">Timer music</span>
+          <span class="sr-only">Play with timer music</span>
         </button>
         <!-- Timer setting (time limit) toggle -->
         <button 
