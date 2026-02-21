@@ -135,9 +135,10 @@ Stimulus.register("timer", class extends Controller {
   static targets = [ 
     "switchSetting", 
     "switchActive", 
-    "display", 
-    "audioElement", 
-    "announcement", 
+    "audioElement",
+    "timerArea",
+    "timerDisplay",  
+    "timerAnnouncement", 
     "liveregion" 
   ]
 
@@ -186,8 +187,8 @@ Stimulus.register("timer", class extends Controller {
     this.countdown = new Countdown().setDuration(180);
 
     this.countdown.onTick = (time) => {
-      this.displayTarget.textContent = this.formatMMSS(time);
-      this.announcementTarget.textContent = this.formatHumanReadable(time);
+      this.timerDisplayTarget.textContent = this.formatMMSS(time);
+      this.timerAnnouncementTarget.textContent = this.formatHumanReadable(time);
     };
 
     this.countdown.onCompleted = () => {
@@ -209,8 +210,8 @@ Stimulus.register("timer", class extends Controller {
   reset() {
     this.countdown.reset();
     this.audioElementTarget.currentTime = 0;
-    this.displayTarget.textContent = this.formatMMSS(180);
-    this.announcementTarget.textContent = this.formatHumanReadable(180);
+    this.timerDisplayTarget.textContent = this.formatMMSS(180);
+    this.timerAnnouncementTarget.textContent = this.formatHumanReadable(180);
     this.switchActiveTarget.setAttribute("aria-checked", "false");
   }
 
@@ -225,6 +226,9 @@ Stimulus.register("timer", class extends Controller {
     this.switchSettingTarget.setAttribute('aria-checked', !isChecked);
     this.pause();
     this.reset();
+    if (!isChecked) {
+      this.timerAreaTarget.focus();
+    }
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
       localStorage.setItem("aigs-timer", !isChecked);
     }

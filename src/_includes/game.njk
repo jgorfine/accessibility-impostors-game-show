@@ -10,6 +10,7 @@ layout: "base.njk"
   <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight">
     <h1>{{ h1 }}</h1>
     <section 
+      data-timer-target="timerArea"
       id="timer" 
       aria-labelledby="timer__heading" 
       role="region"
@@ -17,8 +18,8 @@ layout: "base.njk"
     >
       <h2 id="timer__heading" class="sr-only">Round timer</h2>
       <div role="timer">
-        <span data-timer-target="display" aria-hidden="true">03:00</span>
-        <span data-timer-target="announcement" class="sr-only">3 minutes</span>
+        <span data-timer-target="timerDisplay" aria-hidden="true">03:00</span>
+        <span data-timer-target="timerAnnouncement" class="sr-only">3 minutes</span>
       </div>
       <!-- Timer running toggle -->
       <button 
