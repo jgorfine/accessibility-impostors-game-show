@@ -267,10 +267,13 @@ Stimulus.register("toolbar", class extends Controller {
 })
 
 Stimulus.register("reveal", class extends Controller {
-  static targets = [ "heading", "figure", "figcaption" ]
-  static values = { fizz: Number, bar: Boolean }
+  static targets = [ "revealSwitch", "heading", "figure", "figcaption" ]
+  static values = { fizz: Number }
 
   toggle() {
+    const isChecked = this.revealSwitchTarget.getAttribute("aria-checked") === "true";
+    this.revealSwitchTarget.setAttribute('aria-checked', !isChecked);
+
     this.figureTargets.forEach((figure, index) => {
       if (figure.querySelector("figcaption") === null) {
         const isImpostor = index + 1 === this.fizzValue;
@@ -285,15 +288,13 @@ Stimulus.register("reveal", class extends Controller {
         figcaptionElement.textContent = text;
         figure.append(figcaptionElement);
       } else {
-        figure.querySelector("figcaption").hidden = this.barValue;
+        figure.querySelector("figcaption").hidden = this.revealSwitchTarget.getAttribute("aria-checked") === "false";
       }
     });
 
-    if (this.barValue === false) {
+    if (!isChecked) {
       this.headingTarget.focus();
     }
-
-    this.barValue = !this.barValue;
   }
 })
 

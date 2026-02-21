@@ -17,11 +17,11 @@ date: 2026-02-16T23:01:00Z
   <a class="game-link style--2" href="https://www.deque.com/axe-con/" rel="nofollow">Home</a>
 {% endsample %}
 
-{% sample "3", "Link", true %}
+{% sample "3", "Link", false %}
   <a class="game-link style--1" href="https://www.deque.com/axe-con/schedule/" rel="nofollow">2026 Agenda</a>
 {% endsample %}
 
-{% sample "4", "Link", false %}
+{% sample "4", "Link", true %}
   <div data-controller="links">
     <div 
       data-action="click->links#navigate" 

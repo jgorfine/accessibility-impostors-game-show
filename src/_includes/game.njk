@@ -5,8 +5,7 @@ layout: "base.njk"
 <main 
   data-controller="layout settings audio timer timerRunning reveal" 
   data-audio-volume-value="0.5"
-  data-reveal-fizz-value="{{ impostor }}" 
-  data-reveal-bar-value="false"
+  data-reveal-fizz-value="{{ impostor }}"
 >
   <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight">
     <h1>{{ h1 }}</h1>
@@ -124,6 +123,7 @@ layout: "base.njk"
         </button>
         <!-- Impostor reveal toggle -->
         <button 
+          data-reveal-target="revealSwitch"
           data-toolbar-target="control" 
           data-action="reveal#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="impostor-toggle"

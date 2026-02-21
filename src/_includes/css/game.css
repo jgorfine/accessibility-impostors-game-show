@@ -30,7 +30,7 @@ header {
     display: grid;
     gap: 0.5em;
     grid-template-areas: "heading timer toolbar";
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr auto 1fr;
   }
 }
 
