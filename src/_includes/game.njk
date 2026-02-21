@@ -2,25 +2,29 @@
 layout: "base.njk"
 ---
 
-<main data-controller="layout reveal" data-reveal-fizz-value="{{ impostor }}" data-reveal-bar-value="false">
-  <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight" data-controller="timer">
+<main 
+  data-controller="layout settings audio timer timerRunning reveal" 
+  data-audio-volume-value="0.5"
+  data-reveal-fizz-value="{{ impostor }}" 
+  data-reveal-bar-value="false"
+>
+  <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight">
     <h1>{{ h1 }}</h1>
     <section 
-      data-timer-active-value="false" 
       id="timer" 
-      aria-labelledby="__heading" 
+      aria-labelledby="timer__heading" 
       role="region"
       tabindex="-1"
     >
-      <h2 id="__heading" class="sr-only">Round timer</h2>
+      <h2 id="timer__heading" class="sr-only">Round timer</h2>
       <div role="timer">
         <span data-timer-target="display" aria-hidden="true">03:00</span>
         <span data-timer-target="announcement" class="sr-only">3 minutes</span>
       </div>
-      <!-- Timer toggle -->
+      <!-- Timer running toggle -->
       <button 
-        data-timer-target="switch"
-        data-action="timer#toggle" 
+        data-timer-target="switchActive"
+        data-action="timer#toggleActive" 
         aria-checked="false" 
         role="switch" 
         type="button"
@@ -34,58 +38,94 @@ layout: "base.njk"
           <path d="M360-840v-80h240v80H360Zm-19.5 731.5Q275-137 226-186t-77.5-114.5Q120-366 120-440t28.5-139.5Q177-645 226-694t114.5-77.5Q406-800 480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80q-74 0-139.5-28.5ZM678-242q82-82 82-198t-82-198q-82-82-198-82t-198 82q-82 82-82 198t82 198q82 82 198 82t198-82ZM480-440ZM360-280h80v-320h-80v320Zm160 0h80v-320h-80v320Z"/>
         </svg>
         <!-- Timer toggle | Label -->
-        <span class="sr-only">Timer</span>
+        <span data-audio-target="timerSwitchLabel" class="sr-only">Timer (without music)</span>
       </button>
     </section>
     <section id="settings" aria-labelledby="settings__heading" role="region">
       <h2 id="settings__heading" class="sr-only">Game settings</h2>
       <div data-controller="toolbar" data-toolbar-index-value="0" aria-labelledby="settings__heading" role="toolbar">
-        <!-- Music toggle -->
-        <!-- <button 
-          data-toolbar-target="control" 
-          data-action="toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
+        <!-- Audio volume down -->
+        <button 
+          data-toolbar-target="control"
+          data-audio-target="audioVolumeDown"
+          data-action="audio#turnVolumeDown keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          id="timer-music-volume-down"
+          tabindex="-1" 
+          type="button"
+          hidden
+        >
+          <!-- Audio volume down | Icon -->
+          <svg aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
+            <path d="M200-360v-240h160l200-200v640L360-360H200Zm440 40v-322q45 21 72.5 65t27.5 97q0 53-27.5 96T640-320ZM480-606l-86 86H280v80h114l86 86v-252ZM380-480Z"/>
+          </svg>
+          <!-- Audio volume down | Label -->
+          <span class="sr-only">Turn music volume down</span>
+        </button>
+        <!-- Audio volume up -->
+        <button 
+          data-toolbar-target="control"
+          data-audio-target="audioVolumeUp"
+          data-action="audio#turnVolumeUp keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          id="timer-music-volume-up"
+          tabindex="-1" 
+          type="button"
+          hidden
+        >
+          <!-- Audio volume up | Icon -->
+          <svg aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
+            <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/>
+          </svg>
+          <!-- Audio volume up | Label -->
+          <span class="sr-only">Turn music volume up</span>
+        </button>
+        <!-- Audio setting toggle -->
+        <button 
+          data-toolbar-target="control"
+          data-audio-target="audioSwitch"
+          data-action="audio#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="timer-music-toggle"
           tabindex="0" 
           aria-checked="false" 
           role="switch" 
           type="button"
-        > -->
+        >
           <!-- Music toggle | On icon -->
-          <!-- <svg class="button__icon--on" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
-            <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/>
-          </svg> -->
+          <svg class="button__icon--on" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
+            <path d="M287-167q-47-47-47-113t47-113q47-47 113-47 23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47q-66 0-113-47Z"/>
+          </svg>
           <!-- Music toggle | Off icon -->
-          <!-- <svg class="button__icon--off" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
-            <path d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"/>
-          </svg> -->
+          <svg class="button__icon--off" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
+            <path d="M792-56 56-792l56-56 736 736-56 56ZM560-514l-80-80v-246h240v160H560v166ZM400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-62l80 80v120q0 66-47 113t-113 47Z"/>
+          </svg>
           <!-- Music toggle | Label -->
-          <!-- <span class="sr-only">Timer music</span> -->
-        <!-- </button> -->
-        <!-- Time limit toggle -->
+          <span class="sr-only">Play with timer music</span>
+        </button>
+        <!-- Timer setting (time limit) toggle -->
         <button 
+          data-timer-target="switchSetting" 
           data-toolbar-target="control" 
-          data-action="toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          data-action="timer#toggleSetting keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="time-limit-toggle"
           tabindex="-1" 
           aria-checked="true" 
           role="switch" 
           type="button"
         >
-          <!-- Time limit toggle | On icon -->
+          <!-- Timer setting (time limit) | On icon -->
           <svg class="button__icon--on" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
             <path d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm-99.5 291.5Q275-137 226-186t-77.5-114.5Q120-366 120-440t28.5-139.5Q177-645 226-694t114.5-77.5Q406-800 480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80q-74 0-139.5-28.5ZM678-242q82-82 82-198t-82-198q-82-82-198-82t-198 82q-82 82-82 198t82 198q82 82 198 82t198-82ZM480-440Z"/>
           </svg>
-          <!-- Time limit toggle | Off icon -->
+          <!-- Timer setting (time limit) | Off icon -->
           <svg class="button__icon--off" aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
             <path d="m798-274-60-60q11-27 16.5-53.5T760-440q0-116-82-198t-198-82q-24 0-51 5t-56 16l-60-60q38-20 80.5-30.5T480-800q60 0 117.5 20T706-722l56-56 56 56-56 56q38 51 58 108.5T840-440q0 42-10.5 83.5T798-274ZM520-552v-88h-80v8l80 80ZM792-56l-96-96q-48 35-103.5 53.5T480-80q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-60 18.5-115.5T192-656L56-792l56-56 736 736-56 56ZM480-160q42 0 82-13t75-37L248-599q-24 35-36 75t-12 84q0 116 82 198t198 82ZM360-840v-80h240v80H360Zm83 435Zm113-112Z"/>
           </svg>
-          <!-- Time limit toggle | Label -->
+          <!-- Timer setting (time limit) | Label -->
           <span class="sr-only">Play with time limit</span>
         </button>
         <!-- Impostor reveal toggle -->
         <button 
           data-toolbar-target="control" 
-          data-action="reveal#toggle toolbar#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
+          data-action="reveal#toggle keydown.right->toolbar#next keydown.left->toolbar#prev" 
           id="impostor-toggle"
           tabindex="-1" 
           aria-checked="false" 
@@ -104,7 +144,6 @@ layout: "base.njk"
           <span class="sr-only">Reveal impostor</span>
         </button>
       </div>
-      <audio></audio>
     </section>
   </header>
   <div id="stage" class="round--{{ count }}">
@@ -112,7 +151,15 @@ layout: "base.njk"
       {{ content | safe }}
     </div>
   </div>
-  <div data-timer-target="liveregion" role="status" aria-live="polite"></div>
+  <audio 
+    data-audio-target="audioElement" 
+    data-timer-target="audioElement" 
+    id="timer-audio" 
+    src="media/dark-alley-deals.mp3" 
+    preload="auto" 
+    muted
+  ></audio>
+  <div data-timer-target="liveregion" class="sr-only" role="status" aria-live="polite"></div>
 </main>
 <!-- <footer role="contentinfo">
   <nav aria-label="The Accessibility Impostors Game Show">

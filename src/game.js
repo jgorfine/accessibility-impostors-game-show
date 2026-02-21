@@ -1,5 +1,29 @@
 import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
 
+/**
+ * Check if browser storage is available
+ * @author MDN Web Docs
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability|Testing for availability}
+ */
+const storageAvailable = (type) => {
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      e.name === "QuotaExceededError" &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
 window.Stimulus = Application.start();
 
 Stimulus.register("layout", class extends Controller {
@@ -22,6 +46,85 @@ Stimulus.register("layout", class extends Controller {
   }
 })
 
+Stimulus.register("audio", class extends Controller {
+  static targets = [ 
+    "audioSwitch", 
+    "audioVolumeDown",
+    "audioVolumeUp", 
+    "audioElement", 
+    "timerSwitchLabel" 
+  ]
+  static values = { volume: Number }
+
+  initialize() {
+    if (storageAvailable("localStorage")) {
+      if (!localStorage.getItem("aigs-audio")) {
+        localStorage.setItem("aigs-audio", "false");
+      }
+      if (!localStorage.getItem("aigs-volume")) {
+        localStorage.setItem("aigs-volume", this.volumeValue);
+      }
+    }
+  }
+
+  audioSwitchTargetConnected(target) {
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
+      target.setAttribute('aria-checked', localStorage.getItem("aigs-audio"));
+      this.audioVolumeUpTarget.hidden = localStorage.getItem("aigs-audio") === "false";
+      this.audioVolumeDownTarget.hidden = localStorage.getItem("aigs-audio") === "false";
+      this.timerSwitchLabelTarget.textContent = localStorage.getItem("aigs-audio") === "true" ? "Timer (with music)" : "Timer (without music)";
+    }
+  }
+
+  audioElementTargetConnected(target) {
+    if (storageAvailable("localStorage")) {
+      if (localStorage.getItem("aigs-audio")) {
+        target.muted = localStorage.getItem("aigs-audio") === "false";
+      }
+      if (localStorage.getItem("aigs-volume")) {
+        target.volume = localStorage.getItem("aigs-volume");
+        this.volumeValue = localStorage.getItem("aigs-volume");
+      }
+    }
+  }
+
+  toggle() {
+    const isChecked = this.audioSwitchTarget.getAttribute("aria-checked") === "true";
+    this.audioSwitchTarget.setAttribute('aria-checked', !isChecked);
+    this.audioElementTarget.muted = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
+    this.audioVolumeUpTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
+    this.audioVolumeDownTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
+    this.timerSwitchLabelTarget.textContent = !isChecked ? "Timer (with music)" : "Timer (without music)";
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
+      localStorage.setItem("aigs-audio", !isChecked);
+    }
+  }
+
+  turnVolumeDown() {
+    if (this.volumeValue > 0) {
+      const newVolume = (this.volumeValue - 0.1).toFixed(1);
+      this.volumeValue = newVolume;
+      if (storageAvailable("localStorage") && localStorage.getItem("aigs-volume")) {
+        localStorage.setItem("aigs-volume", newVolume);
+      }
+    }
+  }
+
+  turnVolumeUp() {
+    if (this.volumeValue < 1) {
+      const newVolume = (this.volumeValue + 0.1).toFixed(1);
+      this.volumeValue = newVolume;
+      if (storageAvailable("localStorage") && localStorage.getItem("aigs-volume")) {
+        localStorage.setItem("aigs-volume", newVolume);
+      }
+    }
+  }
+
+  volumeValueChanged(currentValue, previousValue) {
+    this.audioElementTarget.volume = currentValue;
+  }
+})
+
 /**
  * Timer formatting credit
  * @author JavaScript Development Space
@@ -29,8 +132,14 @@ Stimulus.register("layout", class extends Controller {
  */
 
 Stimulus.register("timer", class extends Controller {
-  static targets = [ "switch", "display", "announcement", "liveregion" ]
-  static values = { active: Boolean }
+  static targets = [ 
+    "switchSetting", 
+    "switchActive", 
+    "display", 
+    "audioElement", 
+    "announcement", 
+    "liveregion" 
+  ]
 
   formatMMSS(time) {
     if (isNaN(time) || time < 0) return "00:00";
@@ -61,6 +170,18 @@ Stimulus.register("timer", class extends Controller {
     );
   }
 
+  initialize() {
+    if (storageAvailable("localStorage") && !localStorage.getItem("aigs-timer")) {
+      localStorage.setItem("aigs-timer", "true");
+    }
+  }
+
+  switchSettingTargetConnected(target) {
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
+      target.setAttribute('aria-checked', localStorage.getItem("aigs-timer"));
+    }
+  }
+
   connect() {
     this.countdown = new Countdown().setDuration(180);
 
@@ -70,27 +191,43 @@ Stimulus.register("timer", class extends Controller {
     };
 
     this.countdown.onCompleted = () => {
-      this.switchTarget.setAttribute("aria-checked", "false");
+      this.switchActiveTarget.setAttribute("aria-checked", "false");
       this.liveregionTarget.textContent = "Time's up! Use 'Reveal impostor' button to see the answer.";
     };
   }
 
   start() {
     this.countdown.start();
+    this.audioElementTarget.play();
   }
 
   pause() {
     this.countdown.pause();
+    this.audioElementTarget.pause();
   }
 
   reset() {
     this.countdown.reset();
+    this.audioElementTarget.currentTime = 0;
+    this.displayTarget.textContent = this.formatMMSS(180);
+    this.announcementTarget.textContent = this.formatHumanReadable(180);
+    this.switchActiveTarget.setAttribute("aria-checked", "false");
   }
 
-  toggle() {
-    const isChecked = this.switchTarget.getAttribute('aria-checked') === 'true';
-    !isChecked ? this.start() : this.pause();
-    this.switchTarget.setAttribute('aria-checked', !isChecked);
+  toggleActive() {
+    const isChecked = this.switchActiveTarget.getAttribute("aria-checked") === "true";
+    this.switchActiveTarget.setAttribute('aria-checked', !isChecked);
+    isChecked ? this.pause() : this.start();
+  }
+
+  toggleSetting() {
+    const isChecked = this.switchSettingTarget.getAttribute("aria-checked") === "true";
+    this.switchSettingTarget.setAttribute('aria-checked', !isChecked);
+    this.pause();
+    this.reset();
+    if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
+      localStorage.setItem("aigs-timer", !isChecked);
+    }
   }
 })
 
@@ -112,12 +249,6 @@ Stimulus.register("toolbar", class extends Controller {
     const newIndex = ((this.indexValue - 1) + visibleControls.length) % visibleControls.length;
     this.indexValue = newIndex;
     this.focusControl();
-  }
-
-  toggle(event) {
-    const switchElement = event.target.closest("[role='switch']");
-    const isChecked = switchElement.getAttribute('aria-checked') === 'true';
-    switchElement.setAttribute('aria-checked', !isChecked);
   }
 
   focusControl() {
