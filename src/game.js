@@ -231,29 +231,56 @@ Stimulus.register("timer", class extends Controller {
   }
 })
 
+const Direction = Object.freeze({
+    NEXT: "NEXT",
+    PREV: "PREVIOUS",
+});
+
 Stimulus.register("toolbar", class extends Controller {
   static targets = [ "control" ]
   static values = { index: Number }
 
+  reorderFromIndex(array, startIndex, direction = Direction.NEXT) {
+    let start = array.slice(startIndex);
+    const end = array.slice(0, startIndex);
+    if (direction === Direction.PREV) {
+      start = start.toReversed();
+    }
+    return start.concat(end);
+  };
+
   controlTargetConnected(target) {
-    if (target.hidden === true) {
+    if (window.getComputedStyle(target).display === "none") {
       target.tabIndex = "-1";
-      if (target.nextElementSibling.hidden !== true) {
+      if (window.getComputedStyle(target.nextElementSibling).display !== "none") {
         target.nextElementSibling.tabIndex = "0";
+        this.indexValue = this.controlTargets.indexOf(target.nextElementSibling);
       }
     }
   }
 
   next() {
     const allControls = this.controlTargets;
-    const newIndex = (this.indexValue + 1) % allControls.length;
+    let newIndex = (this.indexValue + 1) % allControls.length;
+    const potentialNextControl = this.controlTargets[newIndex];
+    if (window.getComputedStyle(potentialNextControl).display === "none") {
+      const allNextControls = this.reorderFromIndex(this.controlTargets, newIndex);
+      const nextControl = allNextControls.find((element) => window.getComputedStyle(element).display !== "none");
+      newIndex = this.controlTargets.indexOf(nextControl);
+    }
     this.indexValue = newIndex;
     this.focusControl();
   }
 
   prev() {
     const allControls = this.controlTargets;
-    const newIndex = ((this.indexValue - 1) + allControls.length) % allControls.length;
+    let newIndex = ((this.indexValue - 1) + allControls.length) % allControls.length;
+    const potentialNextControl = this.controlTargets[newIndex];
+    if (window.getComputedStyle(potentialNextControl).display === "none") {
+      const allPreviousControls = this.reorderFromIndex(this.controlTargets, newIndex, Direction.PREV);
+      const nextControl = allPreviousControls.find((element) => window.getComputedStyle(element).display !== "none")
+      newIndex = this.controlTargets.indexOf(nextControl);
+    }
     this.indexValue = newIndex;
     this.focusControl();
   }
