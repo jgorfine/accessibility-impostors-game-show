@@ -52,7 +52,8 @@ Stimulus.register("audio", class extends Controller {
     "audioVolumeDown",
     "audioVolumeUp", 
     "audioPlayer", 
-    "timerSwitchLabel" 
+    "timerSwitchLabel",
+    "liveRegion" 
   ]
   static values = { volume: Number }
 
@@ -107,6 +108,7 @@ Stimulus.register("audio", class extends Controller {
       if (storageAvailable("localStorage") && localStorage.getItem("aigs-volume")) {
         localStorage.setItem("aigs-volume", newVolume);
       }
+      this.liveRegionTarget.textContent = `Music volume is ${(newVolume * 100).toFixed(0)}%`
     }
   }
 
@@ -117,6 +119,7 @@ Stimulus.register("audio", class extends Controller {
       if (storageAvailable("localStorage") && localStorage.getItem("aigs-volume")) {
         localStorage.setItem("aigs-volume", newVolume);
       }
+      this.liveRegionTarget.textContent = `Music volume is ${(newVolume * 100).toFixed(0)}%`
     }
   }
 
@@ -139,7 +142,7 @@ Stimulus.register("timer", class extends Controller {
     "timerArea",
     "timerDisplay",  
     "timerAnnouncement", 
-    "liveregion" 
+    "liveRegion" 
   ]
   static values = { 
     limit: { type: Number, default: 180 } 
@@ -198,7 +201,7 @@ Stimulus.register("timer", class extends Controller {
       this.audioPlayerTarget.pause();
       this.audioPlayerTarget.currentTime = 0;
       this.switchActiveTarget.setAttribute("aria-checked", "false");
-      this.liveregionTarget.textContent = "Time's up! Use 'Reveal impostor' button to see the answer.";
+      this.liveRegionTarget.textContent = "Time's up! Use 'Reveal impostor' button to see the answer.";
     };
   }
 
