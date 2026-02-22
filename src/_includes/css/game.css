@@ -257,6 +257,34 @@ figcaption {
 }
 
 /******************************************
+ *         GAME STYLES: ROUND #0          *
+ ******************************************/
+
+.round--0 .figtray {
+  padding: clamp(var(--stage-spacing-min), var(--stage-spacing-mid), calc(var(--stage-spacing-max) * 4));
+}
+
+.round--0 .figtray > * {
+  margin: auto;
+}
+
+@media only screen and (min-width: 68.75em) and (min-height: 30em) {
+  .round--0 .grid {
+    grid-template-columns: repeat(2, 1fr);
+    height: var(--grid-height);
+  }
+
+  .round--0 .suspect {
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  .round--0 .figtray {
+    min-height: unset;
+  }
+} 
+
+/******************************************
  *         GAME STYLES: ROUND #1          *
  ******************************************/
 
@@ -732,16 +760,6 @@ footer[role="contentinfo"] nav ol {
   text-align: start;
 }
 
-@media only screen and (min-width: 37.5em) {
-  footer[role="contentinfo"] nav ol {
-    column-gap: 1.25rem;
-    display: flex;
-    flex-direction: row;
-    font-size: 1.5em;
-    text-align: center;
-  }
-}
-
 footer[role="contentinfo"] nav a:not(:has(img)) {
   background-clip: border-box;
   background-color: var(--axecon-color-1);
@@ -756,47 +774,14 @@ footer[role="contentinfo"] nav a:not(:has(img)) {
   text-decoration: none;
 }
 
-@media only screen and (min-width: 37.5em) {
-  footer[role="contentinfo"] nav a:not(:has(img)) {
-    background-color: unset;
-    background-image: none;
-    font-size: 1em;
-    padding: 0;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  footer[role="contentinfo"] nav a:not(:has(img)) {
-    transition: background-position 250ms ease-in-out;
-  }
-}
-
 footer[role="contentinfo"] a:not(:has(img)):is(:hover, :focus) {
   background-position: 0 center;
-}
-
-@media only screen and (min-width: 37.5em) {
-  footer[role="contentinfo"] a:not(:has(img)):is(:hover, :focus) {
-    text-decoration: underline;
-    text-decoration-thickness: 0.125em;
-    text-underline-offset: 0.25em;
-  }
 }
 
 footer[role="contentinfo"] a[aria-current="page"] {
   border-inline-start: 5px solid #34dcf6;
   background-origin: padding-box;
   font-weight: 700;
-}
-
-@media only screen and (min-width: 37.5em) {
-  footer[role="contentinfo"] a[aria-current="page"] {
-    border: none;
-    font-weight: 400;
-    text-decoration: underline;
-    text-decoration-thickness: 0.125em;
-    text-underline-offset: 0.25em;
-  }
 }
 
 footer[role="contentinfo"] .byline {
@@ -832,4 +817,41 @@ footer[role="contentinfo"] a:has(img) img {
   display: block;
   height: auto; 
   width: 100%;
+}
+
+@media only screen and (min-width: 47.5em) {
+  footer[role="contentinfo"] nav ol {
+    column-gap: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  footer[role="contentinfo"] nav a:not(:has(img)) {
+    background-color: unset;
+    background-image: none;
+    font-size: 1em;
+    padding: 0;
+  }
+
+  footer[role="contentinfo"] a:not(:has(img)):is(:hover, :focus) {
+    text-decoration: underline;
+    text-decoration-thickness: 0.125em;
+    text-underline-offset: 0.25em;
+  }
+
+  footer[role="contentinfo"] a[aria-current="page"] {
+    border: none;
+    font-weight: 400;
+    text-decoration: underline;
+    text-decoration-thickness: 0.125em;
+    text-underline-offset: 0.25em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  footer[role="contentinfo"] nav a:not(:has(img)) {
+    transition: background-position 250ms ease-in-out;
+  }
 }
