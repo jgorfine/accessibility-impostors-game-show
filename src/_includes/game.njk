@@ -162,18 +162,19 @@ layout: "base.njk"
   ></audio>
   <div data-timer-target="liveregion" class="sr-only" role="status" aria-live="polite"></div>
 </main>
-<!-- <footer role="contentinfo">
-  <nav aria-label="The Accessibility Impostors Game Show">
-    <a href="/">{{ site.name }}</a>
-    <ol>
+<footer role="contentinfo">
+  <nav aria-labelledby="nav__heading">
+    <h2 id="nav__heading">{{ site.name }}</h2>
+    <ol role="list">
       {%- for round in collections.game -%}
       <li>
-        <a href="{{round.url}}" {% if page.url == round.url %} aria-current="page"{% endif %}>{{ round.data.h1 }}</a>
+        <a href="{{round.url}}" {% if page.url == round.url %}aria-current="page"{% endif %}>{{ round.data.name }}</a>
       </li>
       {%- endfor -%}
     </ol>
   </nav>
+  <div class="byline">brought to you by <a href="https://www.deque.com/axe-con/presenters/jennifergorfine/">Jen Gorfine</a></div>
   <a href="https://www.deque.com/axe-con/">
-    <img src="img/axe-con-logo.svg" alt="axe-con 2026">
+    <img src="media/axe-con-logo.svg" alt="axe-con 2026">
   </a>
-</footer> -->
+</footer>

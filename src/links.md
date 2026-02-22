@@ -2,8 +2,9 @@
 count: "2"
 impostor: "4"
 eleventyComputed:
-  title: "Round #{{ count }} / {{ site.name }}"
-  h1: "Round #{{ count }}: Links"
+  name: "Round #{{ count }}"
+  title: "{{ name }} / {{ site.name }}"
+  h1: "{{ name }}: Links"
 tags: game
 layout: "game.njk"
 date: 2026-02-16T23:01:00Z
