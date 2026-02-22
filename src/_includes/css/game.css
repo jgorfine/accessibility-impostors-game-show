@@ -179,7 +179,7 @@ section:has([role="toolbar"]) {
   gap: var(--stage-spacing);
 }
 
-.sample {
+.suspect {
   border-bottom-color: var(--axecon-color-1);
   border-bottom-style: solid;
   border-bottom-width: 0.25rem;
@@ -187,11 +187,11 @@ section:has([role="toolbar"]) {
   flex-direction: column;
 }
 
-.sample:has(.impostor figcaption:not([hidden])) {
+.suspect:has(.impostor figcaption:not([hidden])) {
   border-bottom-color: #fff;
 }
 
-.sample__heading {
+.suspect__heading {
   background-color: var(--axecon-color-2);
   color: #fff;
   flex: none;
@@ -203,12 +203,12 @@ section:has([role="toolbar"]) {
   text-align: center;
 }
 
-.sample__heading:focus {
+.suspect__heading:focus {
   outline: 0.188rem solid var(--focus-indicator-color);
   outline-offset: -0.3em;
 }
 
-.sample__content {
+.suspect__content {
   background-color: var(--axecon-color-1);
   display: flex;
   flex: 1 1 100%;
@@ -257,6 +257,44 @@ figcaption {
 }
 
 /******************************************
+ *         GAME STYLES: ROUND #0          *
+ ******************************************/
+
+.round--0 .figtray {
+  padding: clamp(var(--stage-spacing-min), var(--stage-spacing-mid), calc(var(--stage-spacing-max) * 4));
+}
+
+.round--0 .figtray > * {
+  margin: auto;
+}
+
+@media only screen and (min-width: 43.75em) and (min-height: 30em) {
+  .round--0 .grid {
+    grid-template-columns: repeat(2, 1fr);
+    height: var(--grid-height);
+  }
+
+  .round--0 .suspect {
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  .round--0 .figtray {
+    min-height: unset;
+  }
+} 
+
+/* ---------------------------------------- */
+/* Game: Images */
+/* ---------------------------------------- */
+
+.game-image {
+  display: block;
+  height: auto;
+  width: min(100%, 30em);
+}
+
+/******************************************
  *         GAME STYLES: ROUND #1          *
  ******************************************/
 
@@ -274,7 +312,7 @@ figcaption {
     height: var(--grid-height);
   }
 
-  .round--1 .sample {
+  .round--1 .suspect {
     max-height: 100%;
     overflow: hidden;
   }
@@ -293,17 +331,17 @@ figcaption {
   overflow-y: auto;
 }
 
-#sample-1 .game-text-block {
+#suspect-1 .game-text-block {
   background-color: var(--axecon-color-3);
   color: #fff;
 }
 
-#sample-2 .game-text-block {
+#suspect-2 .game-text-block {
   background-color: var(--axecon-color-5);
   color: #fff;
 }
 
-#sample-3 .game-text-block {
+#suspect-3 .game-text-block {
   background-color: var(--axecon-color-4);
   color: var(--axecon-color-0);
 }
@@ -355,7 +393,7 @@ figcaption {
   }
 }
 
-.round--2 .sample {
+.round--2 .suspect {
   max-height: 100%;
   overflow: hidden;
 }
@@ -453,7 +491,7 @@ figcaption {
   }
 }
 
-.round--3 .sample {
+.round--3 .suspect {
   max-height: 100%;
   overflow: hidden;
 }
@@ -492,7 +530,7 @@ figcaption {
   color: var(--axecon-color-2);
 }
 
-.sample:not(#sample-5) .game-icon-button:focus {
+.suspect:not(#suspect-5) .game-icon-button:focus {
   outline: 0.188em solid var(--axecon-color-8);
   outline-offset: 0.188em;
 }
@@ -550,7 +588,7 @@ figcaption {
   padding-block-start: clamp(var(--stage-spacing), 4cqb, 3em);
 }
 
-.round--4 .sample {
+.round--4 .suspect {
   max-height: 100%;
   overflow: hidden;
 }
@@ -732,16 +770,6 @@ footer[role="contentinfo"] nav ol {
   text-align: start;
 }
 
-@media only screen and (min-width: 37.5em) {
-  footer[role="contentinfo"] nav ol {
-    column-gap: 1.25rem;
-    display: flex;
-    flex-direction: row;
-    font-size: 1.5em;
-    text-align: center;
-  }
-}
-
 footer[role="contentinfo"] nav a:not(:has(img)) {
   background-clip: border-box;
   background-color: var(--axecon-color-1);
@@ -756,47 +784,14 @@ footer[role="contentinfo"] nav a:not(:has(img)) {
   text-decoration: none;
 }
 
-@media only screen and (min-width: 37.5em) {
-  footer[role="contentinfo"] nav a:not(:has(img)) {
-    background-color: unset;
-    background-image: none;
-    font-size: 1em;
-    padding: 0;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  footer[role="contentinfo"] nav a:not(:has(img)) {
-    transition: background-position 250ms ease-in-out;
-  }
-}
-
 footer[role="contentinfo"] a:not(:has(img)):is(:hover, :focus) {
   background-position: 0 center;
-}
-
-@media only screen and (min-width: 37.5em) {
-  footer[role="contentinfo"] a:not(:has(img)):is(:hover, :focus) {
-    text-decoration: underline;
-    text-decoration-thickness: 0.125em;
-    text-underline-offset: 0.25em;
-  }
 }
 
 footer[role="contentinfo"] a[aria-current="page"] {
   border-inline-start: 5px solid #34dcf6;
   background-origin: padding-box;
   font-weight: 700;
-}
-
-@media only screen and (min-width: 37.5em) {
-  footer[role="contentinfo"] a[aria-current="page"] {
-    border: none;
-    font-weight: 400;
-    text-decoration: underline;
-    text-decoration-thickness: 0.125em;
-    text-underline-offset: 0.25em;
-  }
 }
 
 footer[role="contentinfo"] .byline {
@@ -832,4 +827,41 @@ footer[role="contentinfo"] a:has(img) img {
   display: block;
   height: auto; 
   width: 100%;
+}
+
+@media only screen and (min-width: 47.5em) {
+  footer[role="contentinfo"] nav ol {
+    column-gap: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  footer[role="contentinfo"] nav a:not(:has(img)) {
+    background-color: unset;
+    background-image: none;
+    font-size: 1em;
+    padding: 0;
+  }
+
+  footer[role="contentinfo"] a:not(:has(img)):is(:hover, :focus) {
+    text-decoration: underline;
+    text-decoration-thickness: 0.125em;
+    text-underline-offset: 0.25em;
+  }
+
+  footer[role="contentinfo"] a[aria-current="page"] {
+    border: none;
+    font-weight: 400;
+    text-decoration: underline;
+    text-decoration-thickness: 0.125em;
+    text-underline-offset: 0.25em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  footer[role="contentinfo"] nav a:not(:has(img)) {
+    transition: background-position 250ms ease-in-out;
+  }
 }

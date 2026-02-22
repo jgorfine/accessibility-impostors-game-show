@@ -1,12 +1,12 @@
 ---
-count: "3"
+index: "3"
 impostor: "5"
 timer:
   seconds: "120"
-  display: "2:00"
+  display: "02:00"
   announcement: "2 minutes"
 eleventyComputed:
-  name: "Round #{{ count }}"
+  name: "Round #{{ index }}"
   title: "{{ name }} / {{ site.name }}"
   h1: "{{ name }}: Icon Buttons"
 tags: 'game'
@@ -15,7 +15,7 @@ layout: "game.njk"
 date: 2026-02-16T23:02:00Z
 ---
 
-{% sample "1", "Icon Button", false %}
+{% suspect "1", "Icon Button", false %}
   <div>
     <button class="game-icon-button" aria-label="Save" type="button">
       <svg aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
@@ -23,9 +23,9 @@ date: 2026-02-16T23:02:00Z
       </svg>
     </button>
   </div>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "2", "Icon Button", false, "tooltip" %}
+{% suspect "2", "Icon Button", false, "tooltip" %}
   <div>
     <button
       data-tooltip-target="button" 
@@ -43,9 +43,9 @@ date: 2026-02-16T23:02:00Z
       <span class="arrow" data-tooltip-target="arrow"></span>
     </div>
   </div>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "3", "Icon Button", false, "tooltip" %}
+{% suspect "3", "Icon Button", false, "tooltip" %}
   <div>
     <button 
       data-tooltip-target="button" 
@@ -63,9 +63,9 @@ date: 2026-02-16T23:02:00Z
       <span class="arrow" data-tooltip-target="arrow"></span>
     </div>
   </div>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "4", "Icon Button", false %}
+{% suspect "4", "Icon Button", false %}
   <div>
     <button class="game-icon-button small" type="button">
       <svg aria-label="Undo" role="img" aria-hidden="false" focusable="false" viewBox="0 -960 960 960">
@@ -73,9 +73,9 @@ date: 2026-02-16T23:02:00Z
       </svg>
     </button>
   </div>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "5", "Icon Button", true, "tooltip" %}
+{% suspect "5", "Icon Button", true, "tooltip" %}
   <div>
     <button 
       data-tooltip-target="button" 
@@ -92,9 +92,9 @@ date: 2026-02-16T23:02:00Z
       <span class="arrow" data-tooltip-target="arrow"></span>
     </div>
   </div>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "6", "Icon Button", false %}
+{% suspect "6", "Icon Button", false %}
   <div>
     <button class="game-icon-button" aria-label="Redo" type="button">
       <svg aria-hidden="true" focusable="false" viewBox="0 -960 960 960">
@@ -102,9 +102,9 @@ date: 2026-02-16T23:02:00Z
       </svg>
     </button>
   </div>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "7", "Icon Button", false, "tooltip" %}
+{% suspect "7", "Icon Button", false, "tooltip" %}
   <div>
     <button class="game-icon-button" type="button">
       <svg aria-hidden="false" focusable="false" viewBox="0 -960 960 960">
@@ -113,9 +113,9 @@ date: 2026-02-16T23:02:00Z
       <span class="sr-only">Save</span>
     </button>
   </div>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "8", "Icon Button", false, "tooltip" %}
+{% suspect "8", "Icon Button", false, "tooltip" %}
   <div>
     <button 
       data-tooltip-target="button" 
@@ -133,4 +133,4 @@ date: 2026-02-16T23:02:00Z
       <span class="arrow" data-tooltip-target="arrow"></span>
     </div>
   </div>
-{% endsample %}
+{% endsuspect %}

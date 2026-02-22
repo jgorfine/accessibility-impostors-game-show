@@ -1,12 +1,12 @@
 ---
-count: "4"
+index: "4"
 impostor: "1"
 timer:
   seconds: "120"
-  display: "2:00"
+  display: "02:00"
   announcement: "2 minutes"
 eleventyComputed:
-  name: "Round #{{ count }}"
+  name: "Round #{{ index }}"
   title: "{{ name }} / {{ site.name }}"
   h1: "{{ name }}: Toggle Buttons"
 tags: game
@@ -14,18 +14,18 @@ layout: "game.njk"
 date: 2026-02-16T23:03:00Z
 ---
 
-{% sample "1", "Toggle Button", true %}
+{% suspect "1", "Toggle Button", true %}
   {% filters "1", "Wednesday February 25", true %}
-{% endsample %}
+{% endsuspect %}
 
-{% sample "2", "Toggle Button", false %}
+{% suspect "2", "Toggle Button", false %}
   {% filters "2", "Tuesday, February 24", false, "— Select an option —", "— Select an option —" %}
-{% endsample %}
+{% endsuspect %}
 
-{% sample "3", "Toggle Button", false %}
+{% suspect "3", "Toggle Button", false %}
   {% filters "3", "Tuesday February 24", false, "-- Select track --", "-- Select playlist --" %}
-{% endsample %}
+{% endsuspect %}
 
-{% sample "4", "Toggle Button", false %}
+{% suspect "4", "Toggle Button", false %}
   {% filters "4", "Wed. Feb. 25", false %}
-{% endsample %}
+{% endsuspect %}

@@ -1,28 +1,27 @@
 ---
-count: "1"
+index: "1"
 impostor: "2"
 timer:
   seconds: "180"
-  display: "3:00"
+  display: "03:00"
   announcement: "3 minutes"
 eleventyComputed:
-  name: "Round #{{ count }}"
+  name: "Round #{{ index }}"
   title: "{{ name }} / {{ site.name }}"
   h1: "{{ name }}: Text"
 tags: game  
 layout: "game.njk"
-page_css: "css/text-color.css"
 date: 2026-02-16T23:00:00Z
 ---
 
-{% sample "1", "Text Block", false %}
+{% suspect "1", "Text", false %}
   {% textblock %}
-{% endsample %}
+{% endsuspect %}
 
-{% sample "2", "Text Block", true %}
+{% suspect "2", "Text", true %}
   {% textblock %}
-{% endsample %}
+{% endsuspect %}
 
-{% sample "3", "Text Block", false %}
+{% suspect "3", "Text", false %}
   {% textblock %}
-{% endsample %}
+{% endsuspect %}

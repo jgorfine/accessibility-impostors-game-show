@@ -27,12 +27,12 @@ const storageAvailable = (type) => {
 window.Stimulus = Application.start();
 
 Stimulus.register("layout", class extends Controller {
-  static targets = [ "header", "grid", "sampleHeading" ]
+  static targets = [ "header", "grid", "suspectHeading" ]
 
   captureHeaderHeight() {
     const headerHeight = this.headerTarget.offsetHeight;
     this.gridTarget.style.setProperty('--header-height', `${headerHeight}px`);
-    this.sampleHeadingTargets.forEach((heading) => {
+    this.suspectHeadingTargets.forEach((heading) => {
       heading.style.setProperty('--header-height', `${headerHeight}px`);
     });
   }
