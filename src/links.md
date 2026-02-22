@@ -1,12 +1,12 @@
 ---
-count: "2"
+index: "2"
 impostor: "4"
 timer:
   seconds: "180"
   display: "03:00"
   announcement: "3 minutes"
 eleventyComputed:
-  name: "Round #{{ count }}"
+  name: "Round #{{ index }}"
   title: "{{ name }} / {{ site.name }}"
   h1: "{{ name }}: Links"
 tags: game

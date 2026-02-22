@@ -1,14 +1,14 @@
 ---
-count: "0"
+index: "0"
 impostor: "1"
 timer:
   seconds: "180"
   display: "03:00"
   announcement: "3 minutes"
 eleventyComputed:
-  name: "Example Round"
+  name: "Round #{{ index }}"
   title: "{{ name }} / {{ site.name }}"
-  h1: "{{ name }}: Images"
+  h1: "{{ name }}: Images (Example)"
 tags: game  
 layout: "game.njk"
 eleventyExcludeFromCollections: ["game"]
