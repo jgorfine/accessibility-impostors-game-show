@@ -176,7 +176,9 @@ layout: "base.njk"
     <ol role="list">
       {%- for round in collections.game -%}
       <li>
-        <a href="{{round.url}}" {% if page.url == round.url %}aria-current="page"{% endif %}>{{ round.data.name }}</a>
+        <a href="{{round.url}}" {% if page.url == round.url %}aria-current="page"{% endif %}>
+          {{ round.data.name }}
+        </a>
       </li>
       {%- endfor -%}
     </ol>

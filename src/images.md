@@ -6,12 +6,11 @@ timer:
   display: "03:00"
   announcement: "3 minutes"
 eleventyComputed:
-  name: "Round #{{ index }}"
+  name: "Example Round"
   title: "{{ name }} / {{ site.name }}"
-  h1: "{{ name }}: Images (Example)"
+  h1: "Round #{{ index }}: Images"
 tags: game  
 layout: "game.njk"
-eleventyExcludeFromCollections: ["game"]
 date: 2026-02-16T22:30:00Z
 ---
 
