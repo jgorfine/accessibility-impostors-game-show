@@ -19,7 +19,7 @@ date: 2026-02-16T23:01:00Z
 {% endsample %}
 
 {% sample "3", "Link", false %}
-  <a class="game-link style--1" href="https://www.deque.com/axe-con/schedule/" rel="nofollow">2026 Agenda</a>
+  <a class="game-link style--1" href="https://www.deque.com/axe-con/schedule/" rel="nofollow" aria-current="true">2026 Agenda</a>
 {% endsample %}
 
 {% sample "4", "Link", true %}
