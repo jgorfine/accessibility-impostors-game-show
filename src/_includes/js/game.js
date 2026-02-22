@@ -52,6 +52,7 @@ Stimulus.register("audio", class extends Controller {
     "audioVolumeDown",
     "audioVolumeUp", 
     "audioPlayer", 
+    "timerArea",
     "timerSwitchLabel",
     "liveRegion" 
   ]
@@ -96,6 +97,9 @@ Stimulus.register("audio", class extends Controller {
     this.audioVolumeUpTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
     this.audioVolumeDownTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
     this.timerSwitchLabelTarget.textContent = !isChecked ? "Timer (with music)" : "Timer (without music)";
+    if (!isChecked) {
+      this.timerAreaTarget.focus();
+    }
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
       localStorage.setItem("aigs-audio", !isChecked);
     }
