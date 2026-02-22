@@ -51,7 +51,7 @@ Stimulus.register("audio", class extends Controller {
     "audioSwitch", 
     "audioVolumeDown",
     "audioVolumeUp", 
-    "audioElement", 
+    "audioPlayer", 
     "timerSwitchLabel" 
   ]
   static values = { volume: Number }
@@ -76,7 +76,7 @@ Stimulus.register("audio", class extends Controller {
     }
   }
 
-  audioElementTargetConnected(target) {
+  audioPlayerTargetConnected(target) {
     if (storageAvailable("localStorage")) {
       if (localStorage.getItem("aigs-audio")) {
         target.muted = localStorage.getItem("aigs-audio") === "false";
@@ -91,7 +91,7 @@ Stimulus.register("audio", class extends Controller {
   toggle() {
     const isChecked = this.audioSwitchTarget.getAttribute("aria-checked") === "true";
     this.audioSwitchTarget.setAttribute('aria-checked', !isChecked);
-    this.audioElementTarget.muted = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
+    this.audioPlayerTarget.muted = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
     this.audioVolumeUpTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
     this.audioVolumeDownTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
     this.timerSwitchLabelTarget.textContent = !isChecked ? "Timer (with music)" : "Timer (without music)";
@@ -121,7 +121,7 @@ Stimulus.register("audio", class extends Controller {
   }
 
   volumeValueChanged(currentValue, previousValue) {
-    this.audioElementTarget.volume = currentValue;
+    this.audioPlayerTarget.volume = currentValue;
   }
 })
 
@@ -135,12 +135,15 @@ Stimulus.register("timer", class extends Controller {
   static targets = [ 
     "switchSetting", 
     "switchActive", 
-    "audioElement",
+    "audioPlayer",
     "timerArea",
     "timerDisplay",  
     "timerAnnouncement", 
     "liveregion" 
   ]
+  static values = { 
+    limit: { type: Number, default: 180 } 
+  }
 
   formatMMSS(time) {
     if (isNaN(time) || time < 0) return "00:00";
@@ -184,7 +187,7 @@ Stimulus.register("timer", class extends Controller {
   }
 
   connect() {
-    this.countdown = new Countdown().setDuration(180);
+    this.countdown = new Countdown().setDuration(this.limitValue);
 
     this.countdown.onTick = (time) => {
       this.timerDisplayTarget.textContent = this.formatMMSS(time);
@@ -192,6 +195,8 @@ Stimulus.register("timer", class extends Controller {
     };
 
     this.countdown.onCompleted = () => {
+      this.audioPlayerTarget.pause();
+      this.audioPlayerTarget.currentTime = 0;
       this.switchActiveTarget.setAttribute("aria-checked", "false");
       this.liveregionTarget.textContent = "Time's up! Use 'Reveal impostor' button to see the answer.";
     };
@@ -199,19 +204,19 @@ Stimulus.register("timer", class extends Controller {
 
   start() {
     this.countdown.start();
-    this.audioElementTarget.play();
+    this.audioPlayerTarget.play();
   }
 
   pause() {
     this.countdown.pause();
-    this.audioElementTarget.pause();
+    this.audioPlayerTarget.pause();
   }
 
   reset() {
     this.countdown.reset();
-    this.audioElementTarget.currentTime = 0;
-    this.timerDisplayTarget.textContent = this.formatMMSS(180);
-    this.timerAnnouncementTarget.textContent = this.formatHumanReadable(180);
+    this.audioPlayerTarget.currentTime = 0;
+    this.timerDisplayTarget.textContent = this.formatMMSS(this.limitValue);
+    this.timerAnnouncementTarget.textContent = this.formatHumanReadable(this.limitValue);
     this.switchActiveTarget.setAttribute("aria-checked", "false");
   }
 
@@ -231,6 +236,38 @@ Stimulus.register("timer", class extends Controller {
     }
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
       localStorage.setItem("aigs-timer", !isChecked);
+    }
+  }
+})
+
+Stimulus.register("reveal", class extends Controller {
+  static targets = [ "revealSwitch", "heading", "figure", "figcaption" ]
+  static values = { suspect: Number }
+
+  toggle() {
+    const isChecked = this.revealSwitchTarget.getAttribute("aria-checked") === "true";
+    this.revealSwitchTarget.setAttribute('aria-checked', !isChecked);
+
+    this.figureTargets.forEach((figure, index) => {
+      if (figure.querySelector("figcaption") === null) {
+        const isImpostor = index + 1 === this.suspectValue;
+        figure.classList.add(isImpostor && "impostor");
+        const figcaptionElement = document.createElement("figcaption");
+        let text = "not the impostor";
+        if (isImpostor) {
+          figcaptionElement.setAttribute("data-reveal-target", "figcaption");
+          figcaptionElement.tabIndex = -1;
+          text = "Impostor";
+        }
+        figcaptionElement.textContent = text;
+        figure.append(figcaptionElement);
+      } else {
+        figure.querySelector("figcaption").hidden = this.revealSwitchTarget.getAttribute("aria-checked") === "false";
+      }
+    });
+
+    if (!isChecked) {
+      this.headingTarget.focus();
     }
   }
 })
@@ -301,38 +338,6 @@ Stimulus.register("toolbar", class extends Controller {
 
   indexValueChanged() {
     this.updateTabIndices();
-  }
-})
-
-Stimulus.register("reveal", class extends Controller {
-  static targets = [ "revealSwitch", "heading", "figure", "figcaption" ]
-  static values = { fizz: Number }
-
-  toggle() {
-    const isChecked = this.revealSwitchTarget.getAttribute("aria-checked") === "true";
-    this.revealSwitchTarget.setAttribute('aria-checked', !isChecked);
-
-    this.figureTargets.forEach((figure, index) => {
-      if (figure.querySelector("figcaption") === null) {
-        const isImpostor = index + 1 === this.fizzValue;
-        figure.classList.add(isImpostor && "impostor");
-        const figcaptionElement = document.createElement("figcaption");
-        let text = "not the impostor";
-        if (isImpostor) {
-          figcaptionElement.setAttribute("data-reveal-target", "figcaption");
-          figcaptionElement.tabIndex = -1;
-          text = "Impostor";
-        }
-        figcaptionElement.textContent = text;
-        figure.append(figcaptionElement);
-      } else {
-        figure.querySelector("figcaption").hidden = this.revealSwitchTarget.getAttribute("aria-checked") === "false";
-      }
-    });
-
-    if (!isChecked) {
-      this.headingTarget.focus();
-    }
   }
 })
 

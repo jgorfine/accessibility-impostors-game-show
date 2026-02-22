@@ -1,6 +1,10 @@
 ---
 count: "4"
 impostor: "1"
+timer:
+  seconds: "120"
+  display: "2:00"
+  announcement: "2 minutes"
 eleventyComputed:
   name: "Round #{{ count }}"
   title: "{{ name }} / {{ site.name }}"

@@ -3,9 +3,10 @@ layout: "base.njk"
 ---
 
 <main 
-  data-controller="layout settings audio timer timerRunning reveal" 
+  data-controller="layout settings audio timer reveal" 
+  data-timer-limit-value="{{ timer.seconds }}"
   data-audio-volume-value="0.5"
-  data-reveal-fizz-value="{{ impostor }}"
+  data-reveal-suspect-value="{{ impostor }}"
 >
   <header data-layout-target="header" data-action="resize@window->layout#recalculateHeight">
     <h1>{{ h1 }}</h1>
@@ -18,8 +19,8 @@ layout: "base.njk"
     >
       <h2 id="timer__heading" class="sr-only">Round timer</h2>
       <div role="timer">
-        <span data-timer-target="timerDisplay" aria-hidden="true">03:00</span>
-        <span data-timer-target="timerAnnouncement" class="sr-only">3 minutes</span>
+        <span data-timer-target="timerDisplay" aria-hidden="true">{{ timer.display }}</span>
+        <span data-timer-target="timerAnnouncement" class="sr-only">{{ timer.announcement }}</span>
       </div>
       <!-- Timer running toggle -->
       <button 
@@ -153,8 +154,8 @@ layout: "base.njk"
     </div>
   </div>
   <audio 
-    data-audio-target="audioElement" 
-    data-timer-target="audioElement" 
+    data-audio-target="audioPlayer" 
+    data-timer-target="audioPlayer" 
     id="timer-audio" 
     src="media/dark-alley-deals.mp3" 
     preload="auto" 

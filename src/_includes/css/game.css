@@ -11,7 +11,7 @@ body {
   --footer-padding-block-start: calc(var(--footer-spacing) * 2);
   --footer-padding-block-end: calc(var(--footer-padding-block-start) * 2);
   --footer-padding-inline: calc(var(--footer-spacing) * 2);
-  --grid-height: calc(100dvh - var(--header-height, 7em) - (var(--stage-spacing) * 2) - calc(var(--footer-padding-block-start) / 2)); 
+  --grid-height: calc(100dvh - var(--header-height, 7em) - (var(--stage-spacing) * 2) - calc(var(--footer-padding-block-start) / 8)); 
   --title-font-size-min: 1.75em;
   --title-font-size-mid: 3cqi;
   --title-font-size-max: 4em;
@@ -539,8 +539,11 @@ figcaption {
 
   .round--4 .figtray {
     min-height: unset;
-    padding-block-start: 4em;
   }
+}
+
+.round--4 .figtray {
+  padding-block-start: clamp(var(--stage-spacing), 4cqb, 3em);
 }
 
 .round--4 .sample {
