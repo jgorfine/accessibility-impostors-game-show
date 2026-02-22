@@ -256,7 +256,7 @@ figcaption {
 @media only screen and (min-width: 68.75em) and (min-height: 30em) {
   .round--1 .grid {
     grid-template-columns: repeat(3, 1fr);
-    height: calc(90dvh - var(--header-height, 7em));
+    height: calc(100dvh - var(--header-height, 7em) - (var(--stage-spacing) * 2));
   }
 
   .round--1 .sample {
@@ -318,7 +318,7 @@ figcaption {
 
 @media only screen and (min-width: 31.25em) and (min-height: 30em) {
   .round--2 .grid {
-    height: calc(90dvh - var(--header-height, 7em));
+    height: calc(100dvh - var(--header-height, 7em) - (var(--stage-spacing) * 2));
   }
 }
 
@@ -408,9 +408,9 @@ figcaption {
  *         GAME STYLES: ROUND #3          *
  ******************************************/
 
-@media only screen and (min-width: 31.25em) and (min-height: 30em) {
+@media only screen and (min-width: 31.25em) and (min-height: 40em) {
   .round--3 .grid {
-    height: calc(90dvh - var(--header-height, 7em));
+    height: calc(100dvh - var(--header-height, 7em) - (var(--stage-spacing) * 2));
   }
 }
 
@@ -425,7 +425,7 @@ figcaption {
   }
 }
 
-@media only screen and (min-width: 56.25em) and (min-height: 30em) {
+@media only screen and (min-width: 56.25em) and (min-height: 40em) {
   .round--3 .grid {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -517,7 +517,7 @@ figcaption {
   .round--4 .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    height: calc(90dvh - var(--header-height, 7em));
+    height: calc(100dvh - var(--header-height, 7em) - (var(--stage-spacing) * 2));
   }
 
   .round--4 .figtray {
