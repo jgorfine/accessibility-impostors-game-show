@@ -268,7 +268,7 @@ figcaption {
   margin: auto;
 }
 
-@media only screen and (min-width: 68.75em) and (min-height: 30em) {
+@media only screen and (min-width: 43.75em) and (min-height: 30em) {
   .round--0 .grid {
     grid-template-columns: repeat(2, 1fr);
     height: var(--grid-height);
@@ -283,6 +283,16 @@ figcaption {
     min-height: unset;
   }
 } 
+
+/* ---------------------------------------- */
+/* Game: Images */
+/* ---------------------------------------- */
+
+.game-image {
+  display: block;
+  height: auto;
+  width: min(100%, 30em);
+}
 
 /******************************************
  *         GAME STYLES: ROUND #1          *

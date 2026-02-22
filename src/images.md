@@ -16,13 +16,9 @@ date: 2026-02-16T22:30:00Z
 ---
 
 {% suspect "1", "Image", true %}
-  <div>
-    <img src="https://placehold.co/400x550.png" />
-  </div>
+  <img class="game-image" src="media/rhody.jpg" />
 {% endsuspect %}
 
 {% suspect "2", "Image", false %}
-  <div>
-    <img src="https://placehold.co/400x550.png" alt="" />
-  </div>
+  <img class="game-image" src="media/thea.jpg" alt="Thea is a brown and white Seal Bicolor Ragdoll cat. She lies on the back of a navy couch, head tilted, paws peeking out from underneath her fluffy white chest. She looks very demure." />
 {% endsuspect %}

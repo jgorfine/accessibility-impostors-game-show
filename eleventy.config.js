@@ -48,6 +48,10 @@ export default function (eleventyConfig) {
 </section>`;
   });
 
+  eleventyConfig.addPassthroughCopy("**/*.jpg", {
+    mode: "html-relative"
+  });
+
   eleventyConfig.addPassthroughCopy("**/*.svg", {
     mode: "html-relative"
   });
