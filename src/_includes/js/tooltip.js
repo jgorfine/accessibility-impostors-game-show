@@ -1,7 +1,4 @@
-import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
 import { computePosition, arrow, flip, offset } from 'https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.7.4/+esm';
-
-window.Stimulus = Application.start()
 
 Stimulus.register("tooltip", class extends Controller {
   static targets = [ "button", "tooltip", "arrow" ]

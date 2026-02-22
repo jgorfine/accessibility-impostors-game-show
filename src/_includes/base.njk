@@ -19,15 +19,22 @@
     <style>
       {{ css | cssmin | safe }}
     </style>
-    {% if tags and 'game' in tags  %}
-    <script src="./countdown.js"></script>
-    <script src="./game.js" type="module"></script>
-    {% endif %}
     {% if libraries === 'floatingui' %}
     <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.7.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.7.4"></script>
-    <script src="./tooltip.js" type="module"></script>
     {% endif %}
+    {% set js %} 
+      {% if tags and 'game' in tags  %}
+        {% include "js/countdown.js" %} 
+        {% include "js/game.js" %} 
+      {% endif %}
+      {% if libraries === "floatingui"  %}
+        {% include "js/tooltip.js" %} 
+      {% endif %}
+    {% endset %}
+    <script type="module">
+      {{ js | jsmin | safe }}
+    </script>
   </head>
   <body>
     {{ content | safe }}

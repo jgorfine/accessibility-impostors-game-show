@@ -1,4 +1,5 @@
 import CleanCSS from "clean-css";
+import { minify } from "terser";
 
 export default function (eleventyConfig) {
   eleventyConfig.addShortcode("textblock", function() {
@@ -54,14 +55,20 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("**/*.mp3", {
     mode: "html-relative"
   });
-
-  eleventyConfig.addPassthroughCopy("src/*.js", {
-    mode: "html-relative"
-  });
   
   eleventyConfig.addFilter("cssmin", function(code) {
     return new CleanCSS({}).minify(code).styles;
-  })
+  });
+
+  eleventyConfig.addFilter("jsmin", async function(code) {
+		try {
+			const minified = await minify(code);
+			return minified.code;
+		} catch (err) {
+			console.error("Terser error: ", err);
+			return code;
+		}
+	});
 
   return {
     dir: {
