@@ -18,17 +18,17 @@ export default function (eleventyConfig) {
 </div>
 <div data-filters-target="filters" class="game-filters__body" role="group" hidden>
 <div class="game-filters__field">
-<label for="sample-${count}__tracks">Tracks</label>
+<label for="suspect-${count}__tracks">Tracks</label>
 <div>
-<select data-filters-target="tracks" id="sample-${count}__tracks" readonly>
+<select data-filters-target="tracks" id="suspect-${count}__tracks" readonly>
 <option>${tracksPlaceholder ? tracksPlaceholder : '-- Select an option --'}</option>
 </select>
 </div>
 </div>
 <div class="game-filters__field">
-<label for="sample-${count}__playlists">Playlists</label>
+<label for="suspect-${count}__playlists">Playlists</label>
 <div>
-<select id="sample-${count}__playlists" readonly>
+<select id="suspect-${count}__playlists" readonly>
 <option>${playlistsPlaceholder ? playlistsPlaceholder : '-- Select an option --'}</option>
 </select>
 </div>
@@ -37,10 +37,10 @@ export default function (eleventyConfig) {
 </div>`;
   });
 
-  eleventyConfig.addPairedShortcode("sample", function(content, count, type, isImpostor, controller) {
-    return `<section id="sample-${count}" class="sample" aria-labelledby="sample-${count}__heading" role="region">
-<h2 data-layout-target="sampleHeading" ${isImpostor ? "data-reveal-target='heading'" : ""} id="sample-${count}__heading" class="sample__heading" tabindex="-1">${type} #${count}</h2>
-<div class="sample__content">
+  eleventyConfig.addPairedShortcode("suspect", function(content, count, type, isImpostor, controller) {
+    return `<section id="suspect-${count}" class="suspect" aria-labelledby="suspect-${count}__heading" role="region">
+<h2 data-layout-target="suspectHeading" ${isImpostor ? "data-reveal-target='heading'" : ""} id="suspect-${count}__heading" class="suspect__heading" tabindex="-1">${type} #${count}</h2>
+<div class="suspect__content">
 <figure data-reveal-target="figure">
 <div class="figtray" ${controller ? `data-controller="${controller}"` : ''}>${content}</figtray>
 </figure>

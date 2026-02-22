@@ -179,7 +179,7 @@ section:has([role="toolbar"]) {
   gap: var(--stage-spacing);
 }
 
-.sample {
+.suspect {
   border-bottom-color: var(--axecon-color-1);
   border-bottom-style: solid;
   border-bottom-width: 0.25rem;
@@ -187,11 +187,11 @@ section:has([role="toolbar"]) {
   flex-direction: column;
 }
 
-.sample:has(.impostor figcaption:not([hidden])) {
+.suspect:has(.impostor figcaption:not([hidden])) {
   border-bottom-color: #fff;
 }
 
-.sample__heading {
+.suspect__heading {
   background-color: var(--axecon-color-2);
   color: #fff;
   flex: none;
@@ -203,12 +203,12 @@ section:has([role="toolbar"]) {
   text-align: center;
 }
 
-.sample__heading:focus {
+.suspect__heading:focus {
   outline: 0.188rem solid var(--focus-indicator-color);
   outline-offset: -0.3em;
 }
 
-.sample__content {
+.suspect__content {
   background-color: var(--axecon-color-1);
   display: flex;
   flex: 1 1 100%;
@@ -274,7 +274,7 @@ figcaption {
     height: var(--grid-height);
   }
 
-  .round--1 .sample {
+  .round--1 .suspect {
     max-height: 100%;
     overflow: hidden;
   }
@@ -293,17 +293,17 @@ figcaption {
   overflow-y: auto;
 }
 
-#sample-1 .game-text-block {
+#suspect-1 .game-text-block {
   background-color: var(--axecon-color-3);
   color: #fff;
 }
 
-#sample-2 .game-text-block {
+#suspect-2 .game-text-block {
   background-color: var(--axecon-color-5);
   color: #fff;
 }
 
-#sample-3 .game-text-block {
+#suspect-3 .game-text-block {
   background-color: var(--axecon-color-4);
   color: var(--axecon-color-0);
 }
@@ -355,7 +355,7 @@ figcaption {
   }
 }
 
-.round--2 .sample {
+.round--2 .suspect {
   max-height: 100%;
   overflow: hidden;
 }
@@ -453,7 +453,7 @@ figcaption {
   }
 }
 
-.round--3 .sample {
+.round--3 .suspect {
   max-height: 100%;
   overflow: hidden;
 }
@@ -492,7 +492,7 @@ figcaption {
   color: var(--axecon-color-2);
 }
 
-.sample:not(#sample-5) .game-icon-button:focus {
+.suspect:not(#suspect-5) .game-icon-button:focus {
   outline: 0.188em solid var(--axecon-color-8);
   outline-offset: 0.188em;
 }
@@ -550,7 +550,7 @@ figcaption {
   padding-block-start: clamp(var(--stage-spacing), 4cqb, 3em);
 }
 
-.round--4 .sample {
+.round--4 .suspect {
   max-height: 100%;
   overflow: hidden;
 }

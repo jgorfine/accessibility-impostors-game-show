@@ -14,19 +14,19 @@ layout: "game.njk"
 date: 2026-02-16T23:01:00Z
 ---
 
-{% sample "1", "Link", false %}
+{% suspect "1", "Link", false %}
   <a class="game-link style--1" href="https://www.deque.com/axe-con/presenters" rel="nofollow">Presenters</a>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "2", "Link", false %}
+{% suspect "2", "Link", false %}
   <a class="game-link style--2" href="https://www.deque.com/axe-con/" rel="nofollow">Home</a>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "3", "Link", false %}
+{% suspect "3", "Link", false %}
   <a class="game-link style--1" href="https://www.deque.com/axe-con/schedule/" rel="nofollow" aria-current="true">2026 Agenda</a>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "4", "Link", true %}
+{% suspect "4", "Link", true %}
   <div data-controller="links">
     <div 
       data-action="click->links#navigate" 
@@ -36,12 +36,12 @@ date: 2026-02-16T23:01:00Z
       About
     </div>
   </div>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "5", "Link", false %}
+{% suspect "5", "Link", false %}
   <a class="game-link style--2" href="https://www.deque.com/axe-con/support/" rel="nofollow">Support</a>
-{% endsample %}
+{% endsuspect %}
 
-{% sample "6", "Link", false %}
+{% suspect "6", "Link", false %}
   <a class="game-link style--1" href="https://www.deque.com/axe-con/about" rel="nofollow">About</a>
-{% endsample %}
+{% endsuspect %}

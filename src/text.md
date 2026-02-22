@@ -15,14 +15,14 @@ page_css: "css/text-color.css"
 date: 2026-02-16T23:00:00Z
 ---
 
-{% sample "1", "Text Block", false %}
+{% suspect "1", "Text Block", false %}
   {% textblock %}
-{% endsample %}
+{% endsuspect %}
 
-{% sample "2", "Text Block", true %}
+{% suspect "2", "Text Block", true %}
   {% textblock %}
-{% endsample %}
+{% endsuspect %}
 
-{% sample "3", "Text Block", false %}
+{% suspect "3", "Text Block", false %}
   {% textblock %}
-{% endsample %}
+{% endsuspect %}
