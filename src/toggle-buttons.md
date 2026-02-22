@@ -15,17 +15,17 @@ date: 2026-02-16T23:03:00Z
 ---
 
 {% sample "1", "Toggle Button", true %}
-  {% filters "Wednesday February 25", true %}
+  {% filters "1", "Wednesday February 25", true %}
 {% endsample %}
 
 {% sample "2", "Toggle Button", false %}
-  {% filters "Tuesday, February 24" %}
+  {% filters "2", "Tuesday, February 24", false, "— Select an option —", "— Select an option —" %}
 {% endsample %}
 
 {% sample "3", "Toggle Button", false %}
-  {% filters "Tuesday February 24" %}
+  {% filters "3", "Tuesday February 24", false, "-- Select track --", "-- Select playlist --" %}
 {% endsample %}
 
 {% sample "4", "Toggle Button", false %}
-  {% filters "Wednesday February 25" %}
+  {% filters "4", "Wed. Feb. 25", false %}
 {% endsample %}

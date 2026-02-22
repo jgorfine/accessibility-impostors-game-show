@@ -567,15 +567,16 @@ figcaption {
 
 .game-filters__header {
   align-items: center;
+  column-gap: var(--stage-spacing-max);
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
   justify-content: space-between;
+  row-gap: var(--stage-spacing);
 }
 
 .game-filters__date {
   color: var(--filters-color-2);
-  flex: 1 1 10em;
+  flex: 1 1 auto;
   font-size: 2em;
   font-weight: 300;
   hyphens: auto;
@@ -657,9 +658,9 @@ figcaption {
   color: var(--filters-color-1);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75em;
+  gap: var(--stage-spacing);
   margin-block-start: 2em;
-  padding: 2em;
+  padding: var(--stage-spacing) clamp(var(--stage-spacing-min), 4cqi, var(--stage-spacing-max));
 }
 
 .game-filters__field {
@@ -679,6 +680,7 @@ figcaption {
   font-size: 1.125em;
   margin-block-start: 0.5em;
   padding: 0.5em 1em;
+  scroll-margin-block-start: var(--stage-spacing);
   width: 100%;
 }
 

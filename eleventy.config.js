@@ -10,26 +10,26 @@ export default function (eleventyConfig) {
 </div>`;
   });
 
-  eleventyConfig.addShortcode("filters", function(date, impostor) {
+  eleventyConfig.addShortcode("filters", function(count, date, isImpostor, tracksPlaceholder, playlistsPlaceholder) {
     return `<div data-controller="filters" data-filters-expanded-value="false" class="game-filters">
 <div class="game-filters__header">
 <div class="game-filters__date">${date}</div>
-<button data-filters-target="toggle" data-action="filters#toggle" class="game-filters__button" ${impostor ? '' : `aria-expanded="false"`} type="button">Filter Tracks</button>
+<button data-filters-target="toggle" data-action="filters#toggle" class="game-filters__button" ${isImpostor ? '' : `aria-expanded="false"`} type="button">Filter Tracks</button>
 </div>
 <div data-filters-target="filters" class="game-filters__body" role="group" hidden>
 <div class="game-filters__field">
-<label for="sample-1__tracks">Tracks</label>
+<label for="sample-${count}__tracks">Tracks</label>
 <div>
-<select data-filters-target="tracks" id="sample-1__tracks" readonly>
-<option>-- Select an option --</option>
+<select data-filters-target="tracks" id="sample-${count}__tracks" readonly>
+<option>${tracksPlaceholder ? tracksPlaceholder : '-- Select an option --'}</option>
 </select>
 </div>
 </div>
 <div class="game-filters__field">
-<label for="sample-1__playlists">Playlists</label>
+<label for="sample-${count}__playlists">Playlists</label>
 <div>
-<select id="sample-1__playlists" readonly>
-<option>-- Select an option --</option>
+<select id="sample-${count}__playlists" readonly>
+<option>${playlistsPlaceholder ? playlistsPlaceholder : '-- Select an option --'}</option>
 </select>
 </div>
 </div>
