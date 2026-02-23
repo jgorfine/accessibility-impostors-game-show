@@ -5,6 +5,11 @@ timer:
   seconds: "120"
   display: "02:00"
   announcement: "2 minutes"
+og: 
+  image:
+    height: "630"
+    width: "1200"
+    url: "/round-4.png"  
 eleventyComputed:
   name: "Round #{{ index }}"
   title: "{{ name }} / {{ site.name }}"

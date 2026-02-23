@@ -52,6 +52,8 @@ export default function (eleventyConfig) {
     mode: "html-relative"
   });
 
+  eleventyConfig.addPassthroughCopy("**/*.png");
+
   eleventyConfig.addPassthroughCopy("**/*.svg", {
     mode: "html-relative"
   });
