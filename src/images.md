@@ -9,7 +9,7 @@ og:
   image:
     height: "630"
     width: "1200"
-    url: "/round-0.png"
+    url: "/round0@2x.png"
 eleventyComputed:
   name: "Example Round"
   title: "{{ name }} / {{ site.name }}"
