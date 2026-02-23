@@ -53,7 +53,7 @@ Stimulus.register("audio", class extends Controller {
     "audioVolumeUp", 
     "audioPlayer", 
     "timerArea",
-    "timerSwitchLabel",
+    "timerActiveSwitchLabel",
     "liveRegion" 
   ]
   static values = { volume: Number }
@@ -72,9 +72,7 @@ Stimulus.register("audio", class extends Controller {
   audioSwitchTargetConnected(target) {
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-audio")) {
       target.setAttribute('aria-checked', localStorage.getItem("aigs-audio"));
-      this.audioVolumeUpTarget.hidden = localStorage.getItem("aigs-audio") === "false";
-      this.audioVolumeDownTarget.hidden = localStorage.getItem("aigs-audio") === "false";
-      this.timerSwitchLabelTarget.textContent = localStorage.getItem("aigs-audio") === "true" ? "Timer (with music)" : "Timer (without music)";
+      this.timerActiveSwitchLabelTarget.textContent = localStorage.getItem("aigs-audio") === "true" ? "Timer (with music)" : "Timer (without music)";
     }
   }
 
@@ -94,9 +92,7 @@ Stimulus.register("audio", class extends Controller {
     const isChecked = this.audioSwitchTarget.getAttribute("aria-checked") === "true";
     this.audioSwitchTarget.setAttribute('aria-checked', !isChecked);
     this.audioPlayerTarget.muted = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
-    this.audioVolumeUpTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
-    this.audioVolumeDownTarget.hidden = this.audioSwitchTarget.getAttribute("aria-checked") === "false";
-    this.timerSwitchLabelTarget.textContent = !isChecked ? "Timer (with music)" : "Timer (without music)";
+    this.timerActiveSwitchLabelTarget.textContent = !isChecked ? "Timer (with music)" : "Timer (without music)";
     if (!isChecked) {
       this.timerAreaTarget.focus();
     }
@@ -140,8 +136,8 @@ Stimulus.register("audio", class extends Controller {
 
 Stimulus.register("timer", class extends Controller {
   static targets = [ 
-    "switchSetting", 
-    "switchActive", 
+    "timerSettingSwitch", 
+    "timerActiveSwitch", 
     "audioPlayer",
     "timerArea",
     "timerDisplay",  
@@ -183,15 +179,21 @@ Stimulus.register("timer", class extends Controller {
 
   initialize() {
     if (storageAvailable("localStorage") && !localStorage.getItem("aigs-timer")) {
-      localStorage.setItem("aigs-timer", "true");
+      localStorage.setItem("aigs-timer", "false");
     }
   }
 
-  switchSettingTargetConnected(target) {
+  timerSettingSwitchTargetConnected(target) {
     if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
       target.setAttribute('aria-checked', localStorage.getItem("aigs-timer"));
     }
   }
+
+  // timerAreaTargetConnected(target) {
+  //   if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
+  //     target.hidden = localStorage.getItem("aigs-timer") === "false";
+  //   }
+  // }
 
   connect() {
     this.countdown = new Countdown().setDuration(this.limitValue);
@@ -204,7 +206,7 @@ Stimulus.register("timer", class extends Controller {
     this.countdown.onCompleted = () => {
       this.audioPlayerTarget.pause();
       this.audioPlayerTarget.currentTime = 0;
-      this.switchActiveTarget.setAttribute("aria-checked", "false");
+      this.timerActiveSwitchTarget.setAttribute("aria-checked", "false");
       this.liveRegionTarget.textContent = "Time's up! Use 'Reveal impostor' button to see the answer.";
     };
   }
@@ -224,18 +226,18 @@ Stimulus.register("timer", class extends Controller {
     this.audioPlayerTarget.currentTime = 0;
     this.timerDisplayTarget.textContent = this.formatMMSS(this.limitValue);
     this.timerAnnouncementTarget.textContent = this.formatHumanReadable(this.limitValue);
-    this.switchActiveTarget.setAttribute("aria-checked", "false");
+    this.timerActiveSwitchTarget.setAttribute("aria-checked", "false");
   }
 
   toggleActive() {
-    const isChecked = this.switchActiveTarget.getAttribute("aria-checked") === "true";
-    this.switchActiveTarget.setAttribute('aria-checked', !isChecked);
+    const isChecked = this.timerActiveSwitchTarget.getAttribute("aria-checked") === "true";
+    this.timerActiveSwitchTarget.setAttribute('aria-checked', !isChecked);
     isChecked ? this.pause() : this.start();
   }
 
   toggleSetting() {
-    const isChecked = this.switchSettingTarget.getAttribute("aria-checked") === "true";
-    this.switchSettingTarget.setAttribute('aria-checked', !isChecked);
+    const isChecked = this.timerSettingSwitchTarget.getAttribute("aria-checked") === "true";
+    this.timerSettingSwitchTarget.setAttribute('aria-checked', !isChecked);
     this.pause();
     this.reset();
     if (!isChecked) {

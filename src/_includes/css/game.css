@@ -129,11 +129,24 @@ section:has([role="timer"]):focus {
   outline-offset: 0.3em;
 }
 
-header:has(#time-limit-toggle[aria-checked='false']) #timer, 
-header:has(#time-limit-toggle[aria-checked='false']) #timer-music-toggle,
-header:has(#time-limit-toggle[aria-checked='false']) #timer-music-volume-up,
-header:has(#time-limit-toggle[aria-checked='false']) #timer-music-volume-down {
+header #timer, 
+header #timer-music-toggle,
+header #timer-music-volume-up,
+header #timer-music-volume-down {
   display: none;
+}
+
+header:has(#time-limit-toggle[aria-checked='true']) #timer {
+  display: inline-flex;
+}
+
+header:has(#time-limit-toggle[aria-checked='true']) #timer-music-toggle {
+  display: block;
+}
+
+header:has(#timer-music-toggle[aria-checked='true']) #timer-music-volume-up, 
+header:has(#timer-music-toggle[aria-checked='true']) #timer-music-volume-down {
+  display: block;
 }
 
 [role="timer"] {
