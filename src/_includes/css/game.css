@@ -663,14 +663,15 @@ figcaption {
 
 .game-filters button:hover::before,
 .game-filters button:hover::after {
-  position: absolute;
-  content: "";
-  display: block;
-  top: 0.125em;
-  bottom: 0.125em;
-  width: 0.375em;
   border-top: 0.125em solid #fff;
   border-bottom: 0.125em solid #fff;
+  bottom: 0.125em;
+  content: "";
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: 0.125em;
+  width: 0.375em;
 }
 
 .game-filters button:hover::before {

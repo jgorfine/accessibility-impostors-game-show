@@ -34,24 +34,90 @@ h1 {
   text-wrap: balance;
 }
 
-h1 a {
-  color: inherit;
-  line-height: inherit;
-  text-decoration: none;
-}
-
-h1 a:hover, 
-h1 a:focus {
-  text-decoration: underline;
-  text-decoration-thickness: 0.05em;
-  text-underline-offset: 0.075em;
-}
-
 p {
   font-size: 1.25em;
   line-height: 1.4;
   margin: 1.5em 0 0;
   text-wrap: balance;
+}
+
+[role="group"] {
+  align-items: baseline;
+  column-gap: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2em;
+  row-gap: 0.5em;
+}
+
+.link--text {
+  color: #fff;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.link--text:focus {
+  outline: none;
+}
+
+.link--text:is(:hover, :focus, :active) {
+  text-decoration: underline;
+  text-decoration-thickness: 0.125em;
+  text-underline-offset: 0.25em;
+}
+
+.link--button {
+  background-color: var(--axecon-color-3);
+  box-shadow: 0.625em 0.625em 1.5625em rgba(108, 218, 242, 0.5);
+  color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.125em;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 0.5em 1.5em;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link--button:focus {
+  outline: none;
+}
+
+.link--button:is(:hover, :focus, :active) {
+  color: #fff;
+}
+
+.link--button:is(:hover, :focus, :active)::before,
+.link--button:is(:hover, :focus, :active)::after {
+  border-top: 0.125em solid #fff;
+  border-bottom: 0.125em solid #fff;
+  bottom: 0.125em;
+  content: "";
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: 0.125em;
+  width: 0.375em;
+}
+
+.link--button:is(:hover, :focus, :active)::before {
+  border-left: 0.125em solid #fff;
+  left: 0.25em;
+}
+
+.link--button:is(:hover, :focus, :active)::after {
+  border-right: 0.125em solid #fff;
+  right: 0.25em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .link--button {
+    transition: all ease-in-out 125ms;
+  }
 }
 
 footer {
@@ -60,7 +126,7 @@ footer {
   text-align: center;
 }
 
-footer a {
+.link--image {
   display: inline-block;
   font-size: 1em;
   height: auto;
@@ -68,7 +134,12 @@ footer a {
   width: min(100%, 9em);
 }
 
-footer a img {
+.link--image:focus {
+  outline: 0.188rem solid var(--focus-indicator-color);
+  outline-offset: 0.3em;
+}
+
+.link--image img {
   display: block;
   height: auto; 
   width: 100%;

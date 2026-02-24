@@ -4,14 +4,15 @@ layout: "base.njk"
 
 <main>
   <div class="container">
-    <h1>
-      <a href="https://www.deque.com/axe-con/sessions/the-accessibility-impostors-game-show">{{ site.name }}</a>
-    </h1>
-    <p>Wednesday February 25th at 1:00pm US/Eastern</p>
+    <h1>{{ site.name }}</h1>
+    <div role="group">
+      <a class="link--text" href="https://docs.google.com/presentation/d/1daHVWOHUHs6GDbRGbh_QTvfRdhreLHu0SqVtgkuq7Eo/edit?usp=sharing" target="_blank">Game guide <span class="sr-only">(opens Google Slides in a new tab)</span></a>
+      <a class="link--button" href="/text/">Start</a>
+    </div>
   </div>
 </main>
 <footer role="contentinfo">
-  <a href="https://www.deque.com/axe-con/">
+  <a class="link--image" href="https://www.deque.com/axe-con/">
     <img src="media/axe-con-logo.svg" alt="axe-con 2026">
   </a>
 </footer>
