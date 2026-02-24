@@ -27,22 +27,42 @@ const storageAvailable = (type) => {
 window.Stimulus = Application.start();
 
 Stimulus.register("layout", class extends Controller {
-  static targets = [ "header", "grid", "suspectHeading" ]
+  static targets = [ "header", "grid", "suspectHeading", "suspectTray" ]
 
-  captureHeaderHeight() {
-    const headerHeight = this.headerTarget.offsetHeight;
-    this.gridTarget.style.setProperty('--header-height', `${headerHeight}px`);
-    this.suspectHeadingTargets.forEach((heading) => {
-      heading.style.setProperty('--header-height', `${headerHeight}px`);
+  connect() {
+    this.resizeObserver = new ResizeObserver(entries => {
+      this.handleResize(entries)
+    });
+
+    this.resizeObserver.observe(this.headerTarget);
+
+    this.suspectTrayTargets.forEach((tray) => {
+      this.resizeObserver.observe(tray);
     });
   }
 
-  connect() {
-    this.captureHeaderHeight();
+  handleResize(entries) {
+    entries.forEach(entry => {
+      if (entry.target === this.headerTarget) {
+        if (entry.contentBoxSize) {
+          const borderBoxSize = entry.borderBoxSize[0];
+          const headerHeight = borderBoxSize.blockSize;
+          this.gridTarget.style.setProperty('--header-height', `${headerHeight}px`);
+          this.suspectHeadingTargets.forEach((heading) => {
+            heading.style.setProperty('--header-height', `${headerHeight}px`);
+          });
+        }
+      }
+
+      if (this.suspectTrayTargets.includes(entry.target)) {
+        const hasOverflow = entry.target.scrollHeight > entry.target.clientHeight || entry.target.scrollWidth > entry.target.clientWidth;
+        entry.target.tabIndex = hasOverflow ? "0" : "-1";
+      }
+    });
   }
 
-  recalculateHeight() {
-    this.captureHeaderHeight();
+  disconnect() {
+    this.resizeObserver.disconnect()
   }
 })
 
@@ -188,12 +208,6 @@ Stimulus.register("timer", class extends Controller {
       target.setAttribute('aria-checked', localStorage.getItem("aigs-timer"));
     }
   }
-
-  // timerAreaTargetConnected(target) {
-  //   if (storageAvailable("localStorage") && localStorage.getItem("aigs-timer")) {
-  //     target.hidden = localStorage.getItem("aigs-timer") === "false";
-  //   }
-  // }
 
   connect() {
     this.countdown = new Countdown().setDuration(this.limitValue);

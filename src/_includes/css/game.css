@@ -193,15 +193,8 @@ section:has([role="toolbar"]) {
 }
 
 .suspect {
-  border-bottom-color: var(--axecon-color-1);
-  border-bottom-style: solid;
-  border-bottom-width: 0.25rem;
   display: flex;
   flex-direction: column;
-}
-
-.suspect:has(.impostor figcaption:not([hidden])) {
-  border-bottom-color: #fff;
 }
 
 .suspect__heading {
@@ -259,6 +252,7 @@ figcaption {
 
 .figtray {
   align-items: start;
+  border-block-end: 0.125rem solid var(--axecon-color-1);
   container: tray / inline-size;
   display: flex;
   flex: 1 1 auto;
@@ -267,6 +261,15 @@ figcaption {
   overflow: auto;
   padding: var(--stage-spacing);
   position: relative;
+}
+
+.figtray:focus {
+  outline: none;
+}
+
+.figtray:focus > * {
+  outline: 0.188rem solid var(--focus-indicator-color);
+  outline-offset: calc(var(--stage-spacing) / 2);
 }
 
 /******************************************
@@ -340,8 +343,7 @@ figcaption {
 /* ---------------------------------------- */
 
 .game-text-block {
-  padding: clamp(var(--stage-spacing-min), 8cqb, calc(var(--stage-spacing-max) * 2));
-  overflow-y: auto;
+  padding: clamp(var(--stage-spacing-min), 8cqb, var(--stage-spacing-max));
 }
 
 #suspect-1 .game-text-block {

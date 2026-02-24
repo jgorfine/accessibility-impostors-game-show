@@ -42,7 +42,7 @@ export default function (eleventyConfig) {
 <h2 data-layout-target="suspectHeading" ${isImpostor ? "data-reveal-target='heading'" : ""} id="suspect-${count}__heading" class="suspect__heading" tabindex="-1">${type} #${count}</h2>
 <div class="suspect__content">
 <figure data-reveal-target="figure">
-<div class="figtray" ${controller ? `data-controller="${controller}"` : ''}>${content}</figtray>
+<div class="figtray" data-layout-target="suspectTray" ${controller ? `data-controller="${controller}"` : ''}>${content}</figtray>
 </figure>
 </div>
 </section>`;
