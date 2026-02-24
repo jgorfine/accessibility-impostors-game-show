@@ -482,20 +482,10 @@ figcaption {
  *         GAME STYLES: ROUND #3          *
  ******************************************/
 
-@media only screen and (min-width: 31.25em) and (min-height: 40em) {
-  .round--3 .grid {
-    height: var(--grid-height);
-  }
-}
-
 @media only screen and (min-width: 31.25em) {
   .round--3 .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
-  }
-
-  .round--3 .figtray {
-    min-height: unset;
   }
 }
 
@@ -503,6 +493,11 @@ figcaption {
   .round--3 .grid {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    height: var(--grid-height);
+  }
+
+  .round--3 .figtray {
+    min-height: unset;
   }
 }
 
